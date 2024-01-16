@@ -36,7 +36,9 @@ public:
         for(auto it:nodes){
             vector<int>temp;
             for(auto it2:it.second){
-                temp.insert(temp.end(),it2.second.begin(),it2.second.end());
+                for(auto it3:it2.second){
+                    temp.push_back(it3);
+                }
             }
             ans.push_back(temp);
         }
