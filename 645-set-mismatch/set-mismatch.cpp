@@ -13,7 +13,7 @@ public:
         int cnt=1;
         while(cnt<=nums.size()){
             if(count(nums.begin(),nums.end(),cnt)==0){
-                ans.push_back(cnt);
+                ans.push_back(cnt);break;
             }
             cnt++;
         }
