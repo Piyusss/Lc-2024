@@ -10,7 +10,8 @@
  * };
  */
 class Solution {
-public:TreeNode* build(vector<int>arr,int &i,int bound){
+public:
+    TreeNode* build(vector<int>arr,int &i,int bound){
     if(i==arr.size() || arr[i]>bound)return NULL;
 
     TreeNode* root=new TreeNode(arr[i++]);
