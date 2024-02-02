@@ -12,9 +12,7 @@ public:
         //now
 
         vector<int>ans;
-        for(auto it:store){
-            if(it>=low && it<=high)ans.push_back(it);
-        }
+        for(auto it:store)if(it>=low && it<=high)ans.push_back(it);
         return ans;
     }
 };
