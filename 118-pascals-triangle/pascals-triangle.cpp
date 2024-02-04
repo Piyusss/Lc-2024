@@ -5,7 +5,7 @@ public:
 //     return n*fact(n-1);
 // }
 unsigned long long f(int n,int r){
-    int res=1;
+    unsigned long long res=1;
     for(int i=0;i<r;i++){
         res*=(n-i);
         res/=(i+1);
