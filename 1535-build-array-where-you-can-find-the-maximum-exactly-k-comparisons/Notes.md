@@ -1,1 +1,1 @@
-<h2>build-array-where-you-can-find-the-maximum-exactly-k-comparisons Notes</h2><hr>Mmeoization code ::
+<h2>build-array-where-you-can-find-the-maximum-exactly-k-comparisons Notes</h2><hr>Memoization code ::
