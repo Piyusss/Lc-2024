@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool check(int i,int j,int k){
-        if(i+j>k && j+k>i && i+k>j)return 1;
+        if(i+j>k)return 1;
         return 0;
     }
     int largestPerimeter(vector<int>& nums) {
