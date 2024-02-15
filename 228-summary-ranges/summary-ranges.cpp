@@ -10,17 +10,9 @@ public:
                 if(start==end)v.push_back(to_string(nums[n-1]));
                 else v.push_back(to_string(start)+"->"+to_string(end));
             }
-            else if(nums[i]+1==nums[i+1]){
-                end=nums[i+1];
-                continue;
-            }
+            else if(nums[i]+1==nums[i+1])end=nums[i+1];
             else{
-                if(start==end){
-                    v.push_back(to_string(start));
-                    start=nums[i+1];
-                    end=nums[i+1];
-                    continue;
-                }
+                if(start==end)v.push_back(to_string(start));
                 else v.push_back(to_string(start)+"->"+to_string(end));
                 start=nums[i+1];
                 end=nums[i+1];
