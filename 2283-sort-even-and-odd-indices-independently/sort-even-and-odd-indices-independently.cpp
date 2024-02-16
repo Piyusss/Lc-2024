@@ -8,20 +8,19 @@ public:
             else even.push_back(nums[i]);
         }
         //now
-        sort(odd.begin(),odd.end());
-        reverse(odd.begin(),odd.end());
+        sort(odd.begin(),odd.end(),greater<int>());
         sort(even.begin(),even.end());
         //now
-        vector<int>ans;
-        for(int i=0;i<min(odd.size(),even.size());i++){
+        vector<int>ans;int s=min(odd.size(),even.size());
+        for(int i=0;i<s;i++){
             ans.push_back(even[i]);
             ans.push_back(odd[i]);
         }
         if(even.size()>odd.size()){
-            for(int i=min(odd.size(),even.size());i<even.size();i++)ans.push_back(even[i]);
+            for(int i=s;i<even.size();i++)ans.push_back(even[i]);
         }
         if(even.size()<odd.size()){
-            for(int i=min(odd.size(),even.size());i<odd.size();i++)ans.push_back(odd[i]);
+            for(int i=s;i<odd.size();i++)ans.push_back(odd[i]);
         }
         return ans;
     }
