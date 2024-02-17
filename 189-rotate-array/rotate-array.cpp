@@ -5,25 +5,9 @@ public:
         vector<int>ans(n);
         int s=0;
         //now
-        if(n>=k){
-        for(int i=0;i<n;i++){
-            int p=i+k;
-            if(p>=n){
-                p=s;
-                s++;
-            }
-            ans[p]=nums[i];
-        }
-        nums=ans;
-        return;
-        }
-        //now
         int diff=k-n;
-        while(diff>n){
-            diff-=n;
-        }
-        //now
-        k=diff;
+        while(diff>n)diff-=n;
+        if(n<k)k=diff;
         for(int i=0;i<n;i++){
             int p=i+k;
             if(p>=n){
