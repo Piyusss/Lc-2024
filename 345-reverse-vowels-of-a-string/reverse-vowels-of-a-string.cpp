@@ -1,23 +1,30 @@
 class Solution {
 public:
+bool f(char ch){
+    vector<char>v={'a','e','i','o','u',
+                   'A','E','I','O','U'};
+    if(find(v.begin(),v.end(),ch)!=v.end())return 1;
+    return 0;
+}
     string reverseVowels(string s) {
         int n=s.size();
-        vector<char>vc;
-        vector<int>vi;
-
-        for(int i=0;i<n;i++){
-            if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u'
-             || s[i]=='A' || s[i]=='E' || s[i]=='I' || s[i]=='O' || s[i]=='U'){
-                vc.push_back(s[i]);
-                vi.push_back(i);
+        int i=0;int j=n-1;
+        while(i<j){
+            if(!f(s[i]) && !f(s[j])){
+                i++;
+                j--;
             }
-        }
-        //now
-        reverse(vi.begin(),vi.end());
-        //now
-        for(auto it:vi){
-            s[it]=vc.front();
-            vc.erase(vc.begin());
+            else if(f(s[i]) && f(s[j])){
+                swap(s[i],s[j]);
+                i++;
+                j--;
+            }
+            else if(f(s[i])){
+                while(!f(s[j]))j--;
+            }
+            else {
+                while(!f(s[i]))i++;
+            }
         }
         return s;
     }
