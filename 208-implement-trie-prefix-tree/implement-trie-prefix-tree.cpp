@@ -42,7 +42,7 @@ trieNode* getNode(){
             }
             crawl=crawl->child[idx];
         }
-        if(crawl!=NULL && crawl->isEndOfWord==true)return true;
+        if(crawl->isEndOfWord==true)return true;
         return 0;
     }
     
