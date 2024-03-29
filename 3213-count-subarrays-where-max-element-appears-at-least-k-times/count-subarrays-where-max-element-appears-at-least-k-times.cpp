@@ -4,16 +4,15 @@ public:
         long long n=nums.size();
         long long maxE=*max_element(nums.begin(),nums.end());
         //now
-        long long i=0,j=0,ans=0,cnt=0;
-        while(j<n){
-            if(nums[j]==maxE)cnt++;
-            while(cnt>=k){
-                ans+=n-j;
-                if(nums[i]==maxE)cnt--;
-                i++;
+        long long ans=0;
+        vector<long long>ind;
+        for(int i=0;i<n;i++){
+            if(nums[i]==maxE)ind.push_back(i);
+            if(ind.size()>=k){
+                ans+=ind[ind.size()-k]+1;
             }
-            j++;
         }
         return ans;
     }
 };
+//1 3 2 3 2
