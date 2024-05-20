@@ -10,31 +10,38 @@
  */
 class Solution {
 public:
-void f(vector<int>&ans,ListNode* list){
-    ListNode* temp=list;
-    while(temp!=NULL){
-        ans.push_back(temp->val);
-        temp=temp->next;
-    }
-}
+ListNode* f(ListNode* head1,ListNode* head2){
+        ListNode* temp1=head1;
+        ListNode* temp2=head2;
 
-ListNode* func(vector<int>ans){
-    ListNode* temp=new ListNode(ans[0]);
-    ListNode* start=temp;
-    for(int i=1;i<ans.size();i++){
-        temp->next=new ListNode(ans[i]);
-        temp=temp->next;
-    }
-    return start;
-}
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        vector<int>ans;
-        for(auto it:lists){
-            f(ans,it);
+        ListNode* dummyNode=new ListNode(-1);
+        ListNode* dummyNodePrev=dummyNode;
+
+        while(temp1 && temp2){
+            if(temp1->val < temp2->val){
+                dummyNode->next=temp1;
+                dummyNode=temp1;
+                temp1=temp1->next;
+            }
+            else{
+                dummyNode->next=temp2;
+                dummyNode=temp2;
+                temp2=temp2->next;
+            }
         }
-        sort(ans.begin(),ans.end());
-        if(ans.size()==0)return NULL;
+        if(temp1)dummyNode->next=temp1;
+        if(temp2)dummyNode->next=temp2;
+        return dummyNodePrev->next;
+}
+    ListNode* mergeKLists(vector<ListNode*>& lists){
+        if(lists.size()==0)return NULL;
 
-        return func(ans);
+        ListNode* temp1=lists[0];
+        for(int i=1;i<lists.size();i++){
+            ListNode* temp2=lists[i];
+            temp1=f(temp1,temp2);
+        }
+
+        return temp1;
     }
 };
