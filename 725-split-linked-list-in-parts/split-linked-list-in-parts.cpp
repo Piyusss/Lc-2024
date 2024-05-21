@@ -26,12 +26,13 @@ public:
         ListNode* cur=head;
 
         for(int i=0;i<k && cur!=NULL;i++){
-            ans[i]=cur; //how??
             for(int count=1;count<=eachCap+(remNodes>0?1:0);count++){
                 prev=cur;
                 cur=cur->next;
             }
             prev->next=NULL;
+            ans[i]=head;
+            head=cur;
             remNodes--;
         }
         return ans;
