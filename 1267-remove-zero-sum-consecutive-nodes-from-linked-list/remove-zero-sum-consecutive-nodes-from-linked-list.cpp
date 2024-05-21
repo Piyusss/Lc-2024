@@ -11,22 +11,34 @@
 class Solution {
 public:
     ListNode* removeZeroSumSublists(ListNode* head) {
-        if (head == nullptr)
-        return head;
 
-    ListNode* current = head;
-    int sum = 0;
+        int prefixSum=0;
+        map<int,ListNode*>mp;
 
-    while (current != nullptr) {
-        sum += current->val;
-        if (sum == 0) {
-            head = current->next;
-            return removeZeroSumSublists(head);
+        ListNode* temp=head;
+        ListNode* dummyNode=new ListNode(-1001);dummyNode->next=head;mp[0]=dummyNode;
+        while(temp){
+            prefixSum+=temp->val;
+
+            if(mp[prefixSum]){
+                ListNode* tempInside=mp[prefixSum]->next;
+                //delete entries from tempInside to temp
+                int pSum=prefixSum;
+
+                while(tempInside!=temp){
+                    pSum+=tempInside->val;
+                    mp.erase(pSum);
+                    tempInside=tempInside->next;
+                }
+
+                mp[prefixSum]->next=temp->next;
+            }
+            if(!mp[prefixSum]){
+                mp[prefixSum]=temp;
+            }
+            temp=temp->next;
         }
-        current = current->next;
-    }
-
-    head->next = removeZeroSumSublists(head->next);
-    return head;
+        
+        return dummyNode->next;
     }
 };
