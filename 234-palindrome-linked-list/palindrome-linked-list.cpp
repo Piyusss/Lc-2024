@@ -26,19 +26,22 @@ ListNode* f(ListNode* head){
 
     bool isPalindrome(ListNode* frwd){
 
-        ListNode* slow=frwd;
-        ListNode* fast=frwd;
-        while(fast && fast->next){
-            slow=slow->next;
-            fast=fast->next->next;
+        ListNode* wait=new ListNode(-1);
+        ListNode* wait3=wait;
+        ListNode* wait1=frwd;
+        while(wait1){
+            wait->next=new ListNode(wait1->val);
+            wait1=wait1->next;
+            wait=wait->next;
         }
-
-        ListNode* rev=f(slow);
+        ListNode* wait2=wait3->next;
+        wait->next=NULL;
+        ListNode* rev=f(wait2);
 
         ListNode* temp1=frwd;
         ListNode* temp2=rev;
 
-        while(temp2){
+        while(temp1 && temp2){
             if(temp1->val!=temp2->val)return 0;
             temp1=temp1->next;
             temp2=temp2->next;
