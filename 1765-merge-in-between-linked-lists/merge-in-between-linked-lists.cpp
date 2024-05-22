@@ -10,20 +10,40 @@
  */
 class Solution {
 public:
-    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
-        ListNode* left=NULL;
-        ListNode* right=list1;
-
-        for(int i=0;i<=b;i++){
-            if(i==a-1)left=right;
-            right=right->next;
+    ListNode* mergeInBetween(ListNode* h1, int a, int b, ListNode* h2) {
+        ListNode* dummyNode=new ListNode(-1);
+        dummyNode->next=h1;
+        int cnt=0;
+        ListNode* temp=h1;
+        while(temp){
+            cnt++;
+            temp=temp->next;
         }
-        left->next=list2;
+        //now
 
-        ListNode* temp=list2;
-        while(temp->next!=NULL)temp=temp->next;
-        temp->next=right;
+        ListNode* temp2=dummyNode;
+        for(int i=1;i<=b+1;i++)temp2=temp2->next;
+        
+        ListNode* lastConnect=temp2->next;
 
-        return list1;
+        ListNode* temp1=dummyNode;
+        for(int i=1;i<=a;i++)temp1=temp1->next;
+
+
+        //now
+        temp1->next=h2;
+        //now
+
+
+        ListNode* templ2=h2;
+        while(templ2->next){
+            templ2=templ2->next;
+        }
+
+        //now
+        templ2->next=lastConnect;
+
+
+        return dummyNode->next;
     }
 };
