@@ -17,8 +17,11 @@ ListNode* f(ListNode* head){
     head->next=NULL;
     return last;
 }
-    ListNode* doubleIt(ListNode* head) {
+    ListNode* doubleIt(ListNode* head){
+        ListNode* dummyNode=new ListNode(-1);
+        dummyNode->next=head;
         head=f(head);
+        dummyNode->next=head;
 
         ListNode* temp=head;
         ListNode* prev=temp;
@@ -35,9 +38,10 @@ ListNode* f(ListNode* head){
         if(car==1){
             prev->next=new ListNode(1);
         }
-        
+
         head=f(head);
-        return head;
+        dummyNode->next=head;
+        return dummyNode->next;
     }
 };
 
