@@ -26,7 +26,7 @@ ListNode* f(ListNode* head){
         dummyNode->next=head;
 
         ListNode* temp=head;
-        ListNode* prev=temp;
+        ListNode* prev=dummyNode;
         int maxi=INT_MIN;
         while(temp){
             if(maxi<=temp->val){
