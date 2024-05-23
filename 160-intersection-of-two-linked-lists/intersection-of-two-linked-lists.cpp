@@ -8,21 +8,30 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *h1, ListNode *h2) {
-        map<ListNode*,bool>mp;
-        ListNode* temp1=h1;
-        ListNode* temp2=h2;
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* temp1=headA;
+        ListNode* temp2=headB;
 
-        while(temp1){
-            mp[temp1]=1;
+        int flag1=0,flag2=0;
+        while(temp1 || temp2){
+            if(temp1==temp2)return temp1;
+
+            if(!temp1 && flag1==0){
+                temp1=headB;
+                flag1=1;
+                temp2=temp2->next;
+                continue;
+            }
+            if(!temp2 && flag2==0){
+                temp2=headA;
+                flag2=1;
+                temp1=temp1->next;
+                continue;
+            }
+
             temp1=temp1->next;
-        }
-
-        while(temp2){
-            if(mp[temp2]==1)return temp2;
             temp2=temp2->next;
         }
-
         return NULL;
     }
 };
