@@ -13,9 +13,7 @@ void f(int idx,vector<string>& words,vector<int>& score,int curScore,map<char,in
     maxScore=max(maxScore,curScore);
     if(idx>=w)return;
 
-    
-
-    //pick
+    //check if present word is completely present in mapL or not
     int j=0;
     int tempScore=0;
     map<char,int>freqMpL=mpL;
@@ -28,6 +26,7 @@ void f(int idx,vector<string>& words,vector<int>& score,int curScore,map<char,in
         mpL[words[idx][j]]--;
         j++;
     }
+    //pick- since its present after above check
     if(j==words[idx].length()){
         f(idx+1,words,score,curScore+tempScore,mpL);
     }
