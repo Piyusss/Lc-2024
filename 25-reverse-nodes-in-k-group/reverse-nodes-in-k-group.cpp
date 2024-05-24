@@ -22,11 +22,7 @@ ListNode* reverseFunc(ListNode* &head){
 }
 
 ListNode* findKthNode(ListNode* temp,int k){
-    k-=1;
-    while(temp && k>0){
-        temp=temp->next;
-        k--;
-    }
+    for(int i=1;i<=k-1 && temp;i++)temp=temp->next;
     return temp;
 }
 
