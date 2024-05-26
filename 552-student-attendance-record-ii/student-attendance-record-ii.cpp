@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-int dp[100001][2][3];
+int dp[100001][5][5];
 int MOD=1e9+7;
 
 int f(int absCnt,int latCnt,int idx){
