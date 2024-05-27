@@ -6,11 +6,7 @@ public:
         return cnt;
     }
     int specialArray(vector<int>& nums) {
-        int n=nums.size();
-        for(int i=1;i<=n;i++){
-            int freq=f(nums,i);
-            if(freq==i)return i;
-        }
+        for(int i=1;i<=nums.size();i++)if(f(nums,i)==i)return i;
         return -1;
     }
 };
