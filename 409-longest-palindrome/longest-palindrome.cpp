@@ -7,7 +7,7 @@ public:
          int cnt=0,flag=0;
          //now
             for(auto it:mp){
-                if(it.second%2==0)
+                if(!(it.second&1))
                 cnt+=it.second;
                 
                 else{
