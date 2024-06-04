@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int longestPalindrome(string s) {
+    int longestPalindrome(string s){
          int n=s.size();
          map<char,int>mp;
          for(auto it:s)mp[it]++;
@@ -13,8 +13,6 @@ public:
                     flag=1;
                 }
             }
-
-            if(flag) cnt++;
-        return cnt;
+        return flag ? ++cnt : cnt;
     }
 };
