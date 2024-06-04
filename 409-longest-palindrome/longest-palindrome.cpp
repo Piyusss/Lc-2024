@@ -9,15 +9,12 @@ public:
             for(auto it:mp)if(it.second%2==0)cnt+=it.second;
             for(auto it:mp){
                 if(it.second%2!=0){
-                    cnt+=((it.second)/2)*(2);
+                    cnt+=it.second-1;
                     flag=1;
                 }
             }
-            for(auto it:mp){
-                if(flag){
-                    cnt++;
-                    break;
-                }
+            if(flag){
+                cnt++;
             }
         return cnt;
     }
