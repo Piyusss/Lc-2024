@@ -3,7 +3,7 @@ public:
 #define ll long long
 
 
-vector<vector<ll>>dir={{0,1},{0,-1},{-1,0},{1,0}};
+vector<vector<ll>>dir={{0,0},{0,1},{0,-1},{1,0},{-1,0}};
 
 
 
@@ -24,28 +24,13 @@ vector<vector<ll>>dir={{0,1},{0,-1},{-1,0},{1,0}};
 
             dq.pop_front();
 
-            ll onxCor=-1,onyCor=-1;
-            if(val==1){
-                onxCor=xCor;
-                onyCor=yCor+1;
-            }
-            else if(val==2){
-                onxCor=xCor;
-                onyCor=yCor-1;
-            }
-            else if(val==3){
-                onxCor=xCor+1;
-                onyCor=yCor;
-            }
-            else{
-                onxCor=xCor-1;
-                onyCor=yCor;
-            }
+            ll onxCor=xCor+dir[val][0];
+            ll onyCor=yCor+dir[val][1];
 
             //now
-            for(auto it:dir){
-                ll nxCor=xCor+it[0];
-                ll nyCor=yCor+it[1];
+            for(ll i=1;i<=4;i++){
+                ll nxCor=xCor+dir[i][0];
+                ll nyCor=yCor+dir[i][1];
 
                 if(nxCor>=0 && nxCor<n && nyCor>=0 && nyCor<m){
 
