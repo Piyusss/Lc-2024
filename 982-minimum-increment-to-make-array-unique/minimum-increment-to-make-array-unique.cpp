@@ -13,3 +13,6 @@ public:
         return ans;
     }
 };
+//1 2 3 4 5 7
+// ans=6
+// i=5
