@@ -40,6 +40,6 @@ vector<vector<int>>dir={{0,1},{0,-1},{-1,0},{1,0},{-1,-1},{-1,1},{1,-1},{1,1}};
         }
 
         if(dis[n-1][m-1]==1e9)return -1;
-        else return dis[n-1][m-1];
+        return dis[n-1][m-1];
     }
 };
