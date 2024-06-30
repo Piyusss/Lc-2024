@@ -4,7 +4,7 @@ vector<int>ans;
 bool dfs(int node , vector<int>&vis , vector<int>&pathVis , vector<int>adj[],vector<int>&check){
         vis[node]=1;
         pathVis[node]=1;
-        
+
         for(auto it:adj[node]){
             if(!vis[it]){
                 if(dfs(it,vis,pathVis,adj,check))return 1;
@@ -25,18 +25,12 @@ bool dfs(int node , vector<int>&vis , vector<int>&pathVis , vector<int>adj[],vec
         }
         vector<int>vis(n),pathVis(n),temp(n),check(n);
         for(int i=0 ; i<n ; i++){
-            if(!vis[i]){
-               if( dfs(i,vis,pathVis,adjList,check) ){
-                check[i]=1;
-                vis=pathVis=temp;
-               }
-            }
-        }
-        for(int i=0 ; i<n ; i++){
-            if(check[i]==0){
+            vis=pathVis=temp;
+            if( !dfs(i,vis,pathVis,adjList,check) ){
                 ans.push_back(i);
             }
         }
+
         return ans;
     }
 };
