@@ -1,42 +1,42 @@
 class Solution {
 public:
+vector<int>ans;
+bool dfs(int node , vector<int>&vis , vector<int>&pathVis , vector<int>adj[],vector<int>&check){
+        vis[node]=1;
+        pathVis[node]=1;
+        
+        for(auto it:adj[node]){
+            if(!vis[it]){
+                if(dfs(it,vis,pathVis,adj,check))return 1;
+            }
+            else if(pathVis[it])return 1;
+        }
+        pathVis[node]=0;
+        return 0;
+    }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int V=graph.size();
-        vector<int>adj[V+5];
-        for(int i=0;i<V;i++){
+        int n=graph.size();
+
+        vector<int>adjList[n];
+        for(int i=0;i<n;i++){
             for(int j=0;j<graph[i].size();j++){
-                adj[i].push_back(graph[i][j]);
+                adjList[i].push_back(graph[i][j]);
             }
         }
-        //now
-        vector<int>adjRev[V];
-        vector<int>inDegree(V,0);
-        for(int i=0;i<V;i++){
-            for(auto it:adj[i]){
-                adjRev[it].push_back(i);
-                inDegree[i]++;
+        vector<int>vis(n),pathVis(n),temp(n),check(n);
+        for(int i=0 ; i<n ; i++){
+            if(!vis[i]){
+               if( dfs(i,vis,pathVis,adjList,check) ){
+                check[i]=1;
+                vis=pathVis=temp;
+               }
             }
         }
-        //now
-        queue<int>q;
-        vector<int>safeNodes;
-        for(int i=0;i<V;i++){
-            if(inDegree[i]==0){
-                q.push(i);
+        for(int i=0 ; i<n ; i++){
+            if(check[i]==0){
+                ans.push_back(i);
             }
         }
-        //now
-        while(!q.empty()){
-            int node=q.front();
-            q.pop();
-            
-            safeNodes.push_back(node);
-            for(auto it:adjRev[node]){
-                inDegree[it]--;
-                if(inDegree[it]==0)q.push(it);
-            }
-        }
-        sort(safeNodes.begin(),safeNodes.end());
-        return safeNodes;
+        return ans;
     }
 };
