@@ -39,18 +39,19 @@ public:
             maxRow=max(maxRow,it[0]);
             maxCol=max(maxCol,it[1]);
         }
+
         DisjointSet ds(maxRow+maxCol+1);
-        unordered_map<int,int>stoneNodes;
+
+        set<int>comp;
         for(auto it:stones){
-            int nodeRow=it[0];
-            int nodeCol=it[1]+maxRow+1;
-            ds.unionBySize(nodeRow,nodeCol);
-            stoneNodes[nodeRow]=1;
-            stoneNodes[nodeCol]=1;
+            int stoneRow=it[0];
+            int stoneCol=it[1]+maxRow+1;
+            ds.unionBySize(stoneRow,stoneCol);
+            comp.insert(stoneRow);
         }
         int cnt=0;
-        for(auto it:stoneNodes){
-            if(ds.findUPar(it.first)==it.first)cnt++;
+        for(auto it:comp){
+            if(ds.findUPar(it)==it)cnt++;
         }
         return n-cnt;
     }
