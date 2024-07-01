@@ -1,5 +1,8 @@
 class Solution {
 public:
+
+    long long M=1e9+7;
+
     int countPaths(int n, vector<vector<int>>& roads) {
         vector<pair<long long,long long>>adj[n];
         for(auto it:roads){
@@ -9,29 +12,26 @@ public:
         //now
 
         priority_queue<
-        pair<long long,long long>,
-        vector<pair<long long,long long>>,
-        greater<pair<long long,long long>>
+            pair<long long,long long>,
+            vector<pair<long long,long long>>,
+            greater<pair<long long,long long>>
         >pq;
-        vector<long long>dist(n,LONG_MAX);
-        vector<long long>ways(n,0);
-        dist[0]=0;ways[0]=1;
+        vector<long long>dist(n,LONG_MAX);dist[0]=0;
+        vector<long long>ways(n,0);ways[0]=1;
 
         //now
-        long long M=(1e9+7);
         pq.push({0,0});
         while(!pq.empty()){
-            auto it=pq.top();
-            long long dis=it.first;
-            long long node=it.second;
+            long long dis=pq.top().first;
+            long long node=pq.top().second;
+
             pq.pop();
 
             for(auto it:adj[node]){
                 long long adjNode=it.first;
                 long long edW=it.second;
 
-                //current-shortest
-                if((dis+edW)<dist[adjNode]){
+                if(dis+edW<dist[adjNode]){
                     dist[adjNode]=dis+edW;
                     pq.push({dist[adjNode],adjNode});
                     ways[adjNode]=ways[node];
@@ -41,6 +41,6 @@ public:
                 }
             }
         }
-        return (ways[n-1])%M;
+        return ways[n-1]%M;
     }
 };
