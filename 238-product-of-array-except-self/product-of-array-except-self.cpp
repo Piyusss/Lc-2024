@@ -4,21 +4,29 @@ public:
         int n=nums.size();
         vector<int>ans(n);
 
-        int pr=1;int prp=1;int cnt=0;
+        vector<int>prefixProductFront(n);
+        vector<int>prefixProductBack(n);
+
+        int tempForwardProduct=1;
+        int tempBackwardProduct=1;
+
         for(int i=0;i<n;i++){
-            pr*=nums[i];
-            if(nums[i])prp*=nums[i];
-            if(nums[i]==0)cnt++;
+            prefixProductFront[i]=tempForwardProduct*nums[i];
+            tempForwardProduct*=nums[i];
+        }
+        for(int i=n-1;i>=0;i--){
+            prefixProductBack[i]=tempBackwardProduct*nums[i];
+            tempBackwardProduct*=nums[i];
         }
 
         for(int i=0;i<n;i++){
-            if(nums[i])ans[i]=pr/nums[i];
-            else{
-                if(cnt>1)ans[i]=0;
-                else ans[i]=prp;
-            }
+            int prLeft=1,prRight=1;
+            if(i)prLeft=prefixProductFront[i-1];
+            if(i<n-1)prRight=prefixProductBack[i+1];
+            ans[i]=prLeft*prRight;
         }
 
         return ans;
+
     }
 };
