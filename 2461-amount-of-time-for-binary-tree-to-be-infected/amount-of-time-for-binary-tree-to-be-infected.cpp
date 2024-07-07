@@ -17,24 +17,24 @@ public:
         int amountOfTime(TreeNode* root, int start) {
         f(root);
 
-        queue<int> q;
-        q.push(start);
+        queue<pair<int,int>> q; q.push({start,0});
+        unordered_set<int> visited; visited.insert(start);
 
-        unordered_set<int> visited;
-        int mp=-1;
+        int maxi=0;
         while(!q.empty()) {
-            ++mp;
-            for (int i = q.size(); i > 0; --i) {
-                int currentNode = q.front();
+                int currentNode = q.front().first;
+                int step=q.front().second;
                 q.pop();
-                visited.insert(currentNode);
+
+                maxi=max(maxi,step);
+
                 for(int adjacentNode:graph[currentNode]) {
                     if(!visited.count(adjacentNode)){
-                        q.push(adjacentNode);
+                        visited.insert(currentNode);
+                        q.push({adjacentNode,step+1});
                     }
                 }
-            }
         }
-        return mp;
+        return maxi;
     }
 };
