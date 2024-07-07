@@ -9,9 +9,10 @@
  */
 class Solution {
 public:
-void markParent(TreeNode* root,unordered_map<TreeNode*,TreeNode*>&parent_track,TreeNode* target){
+void markParent(TreeNode* root,unordered_map<TreeNode*,TreeNode*>&parent_track){
     queue<TreeNode*>q;
     q.push(root);
+
     while(!q.empty()){
         TreeNode* current=q.front();
         q.pop();
@@ -28,19 +29,20 @@ void markParent(TreeNode* root,unordered_map<TreeNode*,TreeNode*>&parent_track,T
 }
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
         unordered_map<TreeNode*,TreeNode*>parent_track;
-        markParent(root,parent_track,target);
+        markParent(root,parent_track);
 
         unordered_map<TreeNode*,bool>visited;
         queue<TreeNode*>q;
         q.push(target);
         visited[target]=1;
-        int cur_level=0;
+        int cur_level=-1;
 
         while(!q.empty()){
-            int size=q.size();
-            if(cur_level++==k)break;
+            cur_level++;
+            int n=q.size();
+            if(cur_level==k)break;
 
-            for(int i=0;i<size;i++){
+            for(int i=0;i<n;i++){
                 TreeNode* current=q.front();
                 q.pop();
                 if(current->left && !visited[current->left]){
@@ -57,6 +59,8 @@ void markParent(TreeNode* root,unordered_map<TreeNode*,TreeNode*>&parent_track,T
                 }
             }
         }
+
+
         vector<int>result;
         while(!q.empty()){
             TreeNode* current=q.front();
