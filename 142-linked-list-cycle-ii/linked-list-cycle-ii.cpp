@@ -13,18 +13,23 @@ public:
         ListNode* slow=head;
         ListNode* fast=head;
 
+        int cnt=0;
         while(fast && fast->next){
+            cnt++;
             slow=slow->next;
             fast=fast->next->next;
-            if(slow==fast){
-                slow=head;
-                while(slow!=fast){
-                    slow=slow->next;
-                    fast=fast->next;
-                }
-                return slow;
-            }
+            if(slow==fast)break;
         }
+
+        if(cnt && slow==fast){
+            slow=head;
+            while(slow!=fast){
+                slow=slow->next;
+                fast=fast->next;
+            }
+            return slow;
+        }
+
         return NULL;
     }
 };
