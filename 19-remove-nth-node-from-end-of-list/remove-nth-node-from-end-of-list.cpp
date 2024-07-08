@@ -30,12 +30,12 @@ public:
             return wait;
         }
 
-        //place temp2 in appropriate position
+        //place temp2 in appropriate position.
         ListNode* temp2=head;
         for(int i=1;i<=move;i++)temp2=temp2->next;
 
         ListNode* wait=temp2->next;
-        temp2->next=temp2->next->next ? temp2->next->next: NULL;
+        temp2->next=temp2->next->next;
         wait->next=NULL;
         delete(wait);
 
