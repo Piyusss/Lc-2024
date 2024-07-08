@@ -42,10 +42,10 @@ ListNode* callMergeFunction(ListNode* left,ListNode* right){
 ListNode* mergeFunction(ListNode* head){
     if(!head || !head->next)return head;
 
+    ListNode* left=head;
     ListNode* mid=TortoiseAndHare(head);
     ListNode* right=mid->next;
     mid->next=NULL;
-    ListNode* left=head;
 
     left=mergeFunction(left);
     right=mergeFunction(right);
