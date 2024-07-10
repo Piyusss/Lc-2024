@@ -1,30 +1,30 @@
 class Solution {
 public:
-    int minFallingPathSum(vector<vector<int>>& m) {
-        int n=m.size();
-        vector<vector<int>>dp(n,vector<int>(n,0));
-        
-        for(int i=0;i<n;i++){
-            dp[0][i]=m[0][i];
-        }
 
-        for(int i=1;i<=n-1;i++){
-            for(int j=0;j<=n-1;j++){
-                int up=m[i][j];
-                if(i>0)up+=dp[i-1][j];else up+=1e9;
+int dp[101][101];
 
-                int dl=m[i][j];
-                if(i>0 && j>0)dl+=dp[i-1][j-1];else dl+=1e9;
-                
-                int dr=m[i][j];
-                if(j+1<n)dr+=dp[i-1][j+1];else dr+=1e9;
-                
-                dp[i][j]=min(up,min(dr,dl));
-            }
+int f(vector<vector<int>>&m, int i,int j,int n){
+    for(int k=0;k<n;k++)dp[0][k]=m[0][k];
+
+    for(int i=1;i<n;i++){
+        for(int j=0;j<n;j++){
+            int up=m[i][j] + (i>=1 ? dp[i-1][j] : 1e9 );
+            int dl=m[i][j] + (i>=1 && j>=1 ? dp[i-1][j-1] : 1e9);
+            int dr=m[i][j] + (i>=1 && j<=n-2 ? dp[i-1][j+1] : 1e9);
+            dp[i][j]=min(up,min(dr,dl));
         }
+    }
+
+    int mini=INT_MAX;
+    for(int i=0;i<n;i++)mini=min(mini,dp[n-1][i]);
+    return mini;
+}
+    int minFallingPathSum(vector<vector<int>>& mat) {
+        int n=mat.size();
         int mini=1e9;
-        for(int i=0;i<n;i++){
-            mini=min(mini,dp[n-1][i]);
+        for(int j=0;j<n;j++){
+            memset(dp,-1,sizeof(dp));
+            mini=min(mini,f(mat,1,n-1,n));
         }
         return mini;
     }
