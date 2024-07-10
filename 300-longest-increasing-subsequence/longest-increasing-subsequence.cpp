@@ -1,30 +1,19 @@
 class Solution {
 public:
-int f(int ind,int prevInd,vector<int>arr,int n,vector<vector<int>>&dp){
-    if(ind==n)return 0;
-    if(dp[ind][prevInd+1]!=-1)return dp[ind][prevInd+1];
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
 
-    int notPick=f(ind+1,prevInd,arr,n,dp);
-    int pick=0;
-    if(prevInd==-1 || arr[ind]>arr[prevInd]){
-        pick=1+f(ind+1,ind,arr,n,dp);
-    }
-    return dp[ind][prevInd+1]=max(pick,notPick);
-}
-    int lengthOfLIS(vector<int>& arr) {
-        int n=arr.size();
-        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
-       //now
-       for(int ind=n-1;ind>=0;ind--){
-           for(int prevInd=ind-1;prevInd>=-1;prevInd--){
-                int notPick=dp[ind+1][prevInd+1];
-                int pick=0;
-                if(prevInd==-1 || arr[ind]>arr[prevInd]){
-                    pick=1+dp[ind+1][ind+1];
+        int maxi=1;
+        vector<int>dp(n+1,1);
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j]){
+                    dp[i]=max(dp[i],1+dp[j]);
                 }
-                dp[ind][prevInd+1]=max(pick,notPick);
-           }
-       }
-       return dp[0][-1+1];
+            }
+            maxi=max(maxi,dp[i]);
+        }
+        return maxi;
     }
 };
