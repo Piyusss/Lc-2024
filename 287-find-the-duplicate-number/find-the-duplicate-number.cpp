@@ -5,10 +5,9 @@ public:
         int ans=-1;
         for(int i=0;i<nums.size()-1;i++){
             if(nums[i]==nums[i+1]){
-                ans=nums[i];
-                break;
+                return nums[i];
             }
         }
-        return ans;
+        return -1;
     }
 };
