@@ -11,7 +11,7 @@ bool f(int idx,vector<int>& nums,int n){
 
     for(int i=1;i<=nums[idx];i++){
         int new_idx=idx+i;
-        if(f(new_idx,nums,n))return dp[idx]=1;
+        if(f(new_idx,nums,n))return dp[new_idx]=1;
     }
     return dp[idx]=0;
 }
