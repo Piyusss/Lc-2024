@@ -1,24 +1,19 @@
 class Solution {
 public:
-void f(vector<int>&ds,vector<vector<int>>&ans,vector<int>nums,map<int,int>&mp){
-    if(ds.size()==nums.size()){
-        ans.push_back(ds);
-        return;
+void f(int ind,vector<int>&nums,vector<vector<int>>&ans){
+    if(ind==nums.size()){
+        ans.push_back(nums);
+        return; 
     }
-    
-    for(int i=0;i<nums.size();i++){
-        if(!mp[nums[i]]){
-            ds.push_back(nums[i]);mp[nums[i]]=1;
-            f(ds,ans,nums,mp);
-            mp[nums[i]]=0;ds.pop_back();
-        }
+    for(int i=ind;i<nums.size();i++){
+        swap(nums[ind],nums[i]);
+        f(ind+1,nums,ans);
+        swap(nums[ind],nums[i]);
     }
 }
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<int>ds;
         vector<vector<int>>ans;
-        map<int,int>mp;
-        f(ds,ans,nums,mp);
+        f(0,nums,ans);
         return ans;
     }
 };
