@@ -11,7 +11,6 @@ public:
             else left[i]=1;
         }
 
-        left[n-1]=max(left[n-1],1);
         for(int i=n-2;i>=0;i--){
             if(nums[i]>nums[i+1]){
                 left[i]=max(left[i],++cur);
