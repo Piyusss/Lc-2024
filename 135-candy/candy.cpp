@@ -11,6 +11,7 @@ public:
             else left[i]=1;
         }
 
+        int cnt=max(1,left[n-1]);
         for(int i=n-2;i>=0;i--){
             if(nums[i]>nums[i+1]){
                 left[i]=max(left[i],++cur);
@@ -19,11 +20,8 @@ public:
                 cur=1;
                 left[i]=max(left[i],cur);
             }
+            cnt+=left[i];
         }
-
-        int cnt=0;
-
-        for(int i=0;i<n;i++)cnt+=left[i];
 
         return cnt;
     }
