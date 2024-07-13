@@ -1,9 +1,18 @@
 class Solution {
 public:
 
+static int f(int x){
+    int cnt=0;int fix=32;
+    while(fix--){
+        cnt+=x & 1;
+        x=x>>1;
+    }
+    return cnt;
+}
+
 static bool comp(const int a, const int b){
-    int one=__builtin_popcount(a);
-    int two=__builtin_popcount(b);
+    int one=f(a);
+    int two=f(b);
     
     if(one==two)return a<b;
     return one<two;
