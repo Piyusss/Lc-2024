@@ -5,7 +5,7 @@ static int f(int x){
     int cnt=0;int fix=32;
     while(fix--){
         cnt+=x & 1;
-        x=x>>1;
+        x>>=1;
     }
     return cnt;
 }
