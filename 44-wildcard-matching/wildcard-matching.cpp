@@ -1,27 +1,31 @@
 class Solution {
 public:
 
-int dp[2001][2001];
+bool dp[2001][2001];
 
-bool f(int i,int j,string &s,string &p){
-    if(i<0 && j<0)return 1;
-    if(i<0 && j>=0)return 0;
-    if(j<0 && i>=0){
-        for(int check=0;check<=i;check++)if(s[check]!='*')return 0;
-        return 1;
-    }
-
-    if(dp[i][j]!=-1)return dp[i][j];
-
-    if(s[i]==p[j] || s[i]=='?')return dp[i][j]= f(i-1,j-1,s,p);
-    if(s[i]=='*')return dp[i][j]= f(i-1,j,s,p) || f(i,j-1,s,p);
-
-    return dp[i][j]= 0;
-}
     bool isMatch(string p, string s){
         int n=s.size();
         int m=p.size();
-        memset(dp,-1,sizeof(dp));
-        return f(n-1,m-1,s,p);
+        memset(dp,0,sizeof(dp));
+        
+
+        dp[0][0]=1;
+        for(int j=1;j<=m;j++)dp[0][j]=0;
+        for(int i=1;i<=n;i++){
+            int flag=0;
+            for(int check=1;check<=i;check++)if(s[check-1]!='*'){dp[i][0]=0;flag=1;}
+            if(flag==0)dp[i][0]=1;
+        }
+
+
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(s[i-1]==p[j-1] || s[i-1]=='?')dp[i][j]= dp[i-1][j-1];
+                else if(s[i-1]=='*')dp[i][j]= dp[i-1][j] || dp[i][j-1];
+                else dp[i][j]= 0;
+            }
+        }
+
+        return dp[n][m];
     }
 };
