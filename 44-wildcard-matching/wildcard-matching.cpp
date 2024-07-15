@@ -10,7 +10,6 @@ bool dp[2001][2001];
         
 
         dp[0][0]=1;
-        for(int j=1;j<=m;j++)dp[0][j]=0;
         for(int i=1;i<=n;i++){
             int flag=0;
             for(int check=1;check<=i;check++)if(s[check-1]!='*'){dp[i][0]=0;flag=1;}
@@ -22,7 +21,6 @@ bool dp[2001][2001];
             for(int j=1;j<=m;j++){
                 if(s[i-1]==p[j-1] || s[i-1]=='?')dp[i][j]= dp[i-1][j-1];
                 else if(s[i-1]=='*')dp[i][j]= dp[i-1][j] || dp[i][j-1];
-                else dp[i][j]= 0;
             }
         }
 
