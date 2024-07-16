@@ -1,14 +1,20 @@
 class Solution {
 public:
 
+int dp[10001][1001];
+
 bool isPal(string &s,int i,int j){
     if(i>=j)return 1;
 
-    if(s[i]==s[j])return isPal(s,i+1,j-1);
-    return 0;
+    if(dp[i][j]!=-1)return dp[i][j];
+
+    if(s[i]==s[j])return dp[i][j]= isPal(s,i+1,j-1);
+    return dp[i][j]= 0;
 }
     string longestPalindrome(string s) {
         int n=s.size();
+
+        memset(dp,-1,sizeof(dp));
         
         int max_len=0;
         int sp=0;
