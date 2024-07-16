@@ -7,17 +7,23 @@ public:
 
         int curFlipCount=0;
 
+        deque<int>dq;
+
         for(int i=0;i<n;i++){
-            if(i>=k && nums[i-k]==6){
-                curFlipCount--;
+            if(i>=k){
+                curFlipCount-=dq.front();
+                dq.pop_front();
             }
 
             if(curFlipCount%2==nums[i]){
                 if(i+k>n)return -1;
 
-                nums[i]=6;
+                dq.push_back(1);
                 flips++;
                 curFlipCount++;
+            }
+            else{
+                dq.push_back(0);
             }
         }   
 
