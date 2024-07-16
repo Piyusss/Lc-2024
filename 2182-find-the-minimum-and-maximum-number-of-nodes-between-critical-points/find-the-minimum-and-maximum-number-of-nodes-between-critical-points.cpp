@@ -22,15 +22,17 @@ int maxDistance=INT_MIN;
         ListNode* start=head->next;
         ListNode* prev=head;
         int cnt=0;int track=0;
-        vector<int>temp;
+        int var1=-1,var2=-1;int flag=1;
 
         while(start->next){
             if((start->val<prev->val && start->val<start->next->val) || (start->val>prev->val && start->val>start->next->val)){
-                temp.push_back(cnt);
+                if(flag)var1=cnt;
+                else var2=cnt;
                 track++;
-                if(temp.size()>=2)minDistance=min(minDistance,(temp[temp.size()-1]-temp[temp.size()-2]));
+                if(var1!=-1 && var2!=-1) minDistance=min(minDistance,abs(var1-var2));
                 maxi=max(maxi,cnt);
                 mini=min(mini,cnt);
+                flag=!flag;
             }
             cnt++;
             prev=start;
