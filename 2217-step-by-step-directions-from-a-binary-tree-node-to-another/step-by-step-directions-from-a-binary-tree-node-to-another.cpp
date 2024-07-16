@@ -12,17 +12,6 @@
 class Solution {
 public:
 
-TreeNode* f(TreeNode* root, int p, int q){
-    if(root==NULL || root->val==p || root->val==q)return root;
-
-    TreeNode* lh=f(root->left,p,q);
-    TreeNode* rh=f(root->right,p,q);
-
-    if(lh!=NULL && rh!=NULL)return root;
-    else if(lh!=NULL)return lh;
-    else return rh;
-}
-
 bool findPath(TreeNode* lca,int target,string &path){
     if(!lca)return 0;
 
@@ -40,18 +29,25 @@ bool findPath(TreeNode* lca,int target,string &path){
 }
 
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        TreeNode* lca=f(root,startValue,destValue);
 
         string lcaToSrc="";
         string lcaToDest="";
 
-        findPath(lca,startValue,lcaToSrc);
-        findPath(lca,destValue,lcaToDest);
+        findPath(root,startValue,lcaToSrc);
+        findPath(root,destValue,lcaToDest);
+
+        cout<<lcaToSrc<<" "<<lcaToDest;
+
+        int mark=-1;
+        for(int i=0;i<lcaToSrc.size() && i<lcaToDest.size();i++){
+            if(lcaToSrc[i]==lcaToDest[i])mark=i;
+            else break;
+        }
 
         string res="";
-        for(int i=0;i<lcaToSrc.size();i++)res+="U";
+        for(int i=mark+1;i<lcaToSrc.size();i++)res+="U";
 
-        res+=lcaToDest;
+        for(int i=mark+1;i<lcaToDest.size();i++)res+=lcaToDest[i];
 
         return res;
     }
