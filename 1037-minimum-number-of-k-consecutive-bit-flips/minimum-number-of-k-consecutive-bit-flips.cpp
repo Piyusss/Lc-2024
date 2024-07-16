@@ -5,19 +5,17 @@ public:
 
         int flips=0;
 
-        vector<int>isFlipped(n);
-
         int curFlipCount=0;
 
         for(int i=0;i<n;i++){
-            if(i>=k && isFlipped[i-k]){
+            if(i>=k && nums[i-k]==6){
                 curFlipCount--;
             }
 
             if(curFlipCount%2==nums[i]){
                 if(i+k>n)return -1;
 
-                isFlipped[i]=1;
+                nums[i]=6;
                 flips++;
                 curFlipCount++;
             }
