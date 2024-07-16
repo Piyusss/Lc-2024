@@ -2,10 +2,10 @@ class Solution {
 public:
 
 bool isPal(string &s,int i,int j){
-    while(i<=j){
-        if(s[i++]!=s[j--])return 0;
-    }
-            return 1;
+    if(i>=j)return 1;
+
+    if(s[i]==s[j])return isPal(s,i+1,j-1);
+    return 0;
 }
     string longestPalindrome(string s) {
         int n=s.size();
