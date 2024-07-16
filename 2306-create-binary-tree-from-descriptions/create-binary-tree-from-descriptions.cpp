@@ -20,27 +20,17 @@ public:
             int child=it[1];
             int dir=it[2];
 
-            if(mp.find(par)==mp.end()){
-                mp[par]=new TreeNode(par);
-            }
-            if(mp.find(child)==mp.end()){
-                mp[child]=new TreeNode(child);
-            }
-            if(dir==1){
-                mp[par]->left=mp[child];
-            }
-            else{
-                mp[par]->right=mp[child];
-            }
+            if(mp.find(par)==mp.end()) mp[par]=new TreeNode(par);
+            if(mp.find(child)==mp.end()) mp[child]=new TreeNode(child);
+            if(dir==1) mp[par]->left=mp[child];
+            else mp[par]->right=mp[child];
 
             childSet.insert(child);
         }
 
         for(auto it:descriptions){
             int par=it[0];
-            if(childSet.find(par)==childSet.end()){
-                return mp[par];
-            }
+            if(childSet.find(par)==childSet.end()) return mp[par];
         }
         return NULL;
     }
