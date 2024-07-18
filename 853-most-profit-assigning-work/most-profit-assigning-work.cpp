@@ -8,26 +8,17 @@ public:
         }
 
         sort(v.begin(),v.end());
-
-        for(int i=1;i<v.size();i++)v[i].second=max(v[i].second,v[i-1].second);
+        sort(worker.begin(),worker.end());
 
         int ans=0;
+        int tempProfit=0;
+        int j=0;
         for(auto &it:worker){
-            int l=0;
-            int r=v.size()-1;
-            int maxProfit=0;
-
-            while(l<=r){
-                int mid=l+(r-l)/2;
-
-                if(v[mid].first<=it){
-                    maxProfit=max(maxProfit,v[mid].second);
-                    l=mid+1;
-                }
-                else r=mid-1;
+            while(j<v.size() && it>=v[j].first){
+                tempProfit=max(tempProfit,v[j].second);
+                j++;
             }
-
-            ans+=maxProfit;
+            ans+=tempProfit;
         }
 
         return ans;
