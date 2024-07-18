@@ -4,22 +4,32 @@ public:
         int n=s.size();
 
         stack<int>st;
-
-        string temp="";
+        vector<int>wormhole(n);
 
         for(int i=0;i<n;i++){
             if(s[i]=='('){
-                st.push(temp.size());
+                st.push(i);
             }
-            else if(s[i]!=')'){
-                temp+=s[i];
-            }
-            else{
+            else if(s[i]==')'){
                 int idx=st.top();
-                reverse(temp.begin()+idx,temp.end());
                 st.pop();
+                wormhole[idx]=i;
+                wormhole[i]=idx;
             }
         }
+
+        string temp="";
+        int flag=1;
+        for(int i=0;i<n;i+=flag){
+            if(s[i]=='(' || s[i]==')'){
+                i=wormhole[i];
+                flag=-flag;
+            }
+            else{
+                temp+=s[i];
+            }
+        }
+
         return temp;
     }
 };
