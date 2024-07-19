@@ -1,25 +1,13 @@
 class Solution {
 public:
 
-vector<int> adjList[10];
+vector<int> adjList[11];
 int M=1e9+7;
-int dp[10][5000+1];
+int dp[5000+1][10];
 
-int f(int num,int step){
-    if(step==0)return 1;
-
-    if(dp[num][step]!=-1)return dp[num][step];
-
-    int res=0;
-    for(auto& it:adjList[num]){
-        res=(res+f(it,step-1))%M;
-    }
-
-    return dp[num][step]= res%M;
-}
     int knightDialer(int n){
         int ans=0;
-        memset(dp,-1,sizeof(dp));
+        memset(dp,0,sizeof(dp));
 
         adjList[0].push_back(4);adjList[0].push_back(6);//0
         adjList[1].push_back(6);adjList[1].push_back(8);//1
@@ -31,11 +19,20 @@ int f(int num,int step){
         adjList[7].push_back(2);adjList[7].push_back(6);//7
         adjList[8].push_back(1);adjList[8].push_back(3);//8
         adjList[9].push_back(2);adjList[9].push_back(4);//9
+        
+        for(int i=0;i<=9;i++)dp[0][i]=1;
 
-        for(int i=0;i<=9;i++){
-            ans=(ans+f(i,n-1))%M;
+        for(int step=1;step<=n-1;step++){
+            for(int num=0;num<=9;num++){
+                int res=0;
+                for(auto& it:adjList[num]){
+                    res=(res+dp[step-1][it])%M;
+                }
+                dp[step][num]= res%M;
+            }
         }
         
+        for(int i=0;i<=9;i++)ans=(ans+dp[n-1][i])%M;
         return ans%M;
     }
 };
