@@ -12,16 +12,10 @@ public:
 
 
         while(start<n && ( s[start]>='0' && s[start]<='9' )  ){
-            res=(res*10) + (s[start]-'0');
+            res=(res*10) + (s[start++]-'0');
             if(res>INT_MAX)return sign==1 ? INT_MAX : INT_MIN;
-            start++;
         }
 
-        if(sign==-1)res=-res;
-
-        if(res>(long long)INT_MAX)return INT_MAX;
-        else if(res<(long long)INT_MIN)return INT_MIN;
-
-        return (int)res;
+        return (int)res*sign;
     }
 };
