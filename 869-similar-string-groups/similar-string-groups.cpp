@@ -48,7 +48,6 @@ bool isSimilar(string X,string Y){
 
         DisjointSet ds(n);
 
-        int ans=n;
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
                 string s1=strs[i];
@@ -56,13 +55,12 @@ bool isSimilar(string X,string Y){
 
                 if(isSimilar(s1,s2) && ds.findUPar(i)!=ds.findUPar(j)){
                     ds.unionBySize(i,j);
-                    ans--;
                 }
             }
         }
 
-        // int cnt=0;
-        // for(int i=0;i<n;i++)if(ds.findUPar(i)==i)cnt++;
-        return ans;
+        int cnt=0;
+        for(int i=0;i<n;i++)if(ds.findUPar(i)==i)cnt++;
+        return cnt;
     }
 };
