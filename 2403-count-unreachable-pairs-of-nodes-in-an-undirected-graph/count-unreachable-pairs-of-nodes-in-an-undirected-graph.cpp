@@ -23,18 +23,16 @@ void dfs(int node,vector<int>adjList[],vector<int>& vis,long long &flag){
         vector<int>vis(n,0);
 
         long long ans=0;
-        vector<long long>v;
-        long long temp=n;
+        long long remaining_nodes=n;
         for(int i=0;i<n;i++){
             if(!vis[i]){
                 long long flag=0;
                 dfs(i,adjList,vis,flag);
-                ans+= (flag*(temp-flag));
-                temp-=flag;
+                ans+= (flag*(remaining_nodes-flag));
+                remaining_nodes-=flag;
             }
         }
 
-        if(v.size()==1)return 0;
         return ans;
     }
 };
