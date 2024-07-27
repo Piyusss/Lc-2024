@@ -2,10 +2,7 @@ class Solution {
 public:
     int shortestPathLength(vector<vector<int>>& graph) {
         int n=graph.size();
-
         if(n<=1)return 0;
-        
-
 
         queue<pair<int,int>>q;
         set<pair<int,int>>vis;
