@@ -27,6 +27,6 @@ int MOD=1e9+7;
         for(auto &it:mp){
             res=(res+it.second)%MOD;
         }
-        return res;
+        return (int)res;
     }
 };
