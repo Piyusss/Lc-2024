@@ -70,19 +70,21 @@ public:
         vector<bool>ans;
 
         for(int i=0;i<requests.size();i++){
-            DisjointSet ds_copy=ds;
             int u=requests[i][0];
             int v=requests[i][1];
 
-            ds_copy.unionBySize(u,v);
+            vector<int>parent_copy=ds.askParent();
+            vector<int>sizee_copy=ds.askSize();
+
+            ds.unionBySize(u,v);
 
             int mark=0;
             for(auto &it2:restrictions){
                 int u2=it2[0];
                 int v2=it2[1];
 
-                int ulp_u=ds_copy.findUPar(u2);
-                int ulp_v=ds_copy.findUPar(v2);
+                int ulp_u=ds.findUPar(u2);
+                int ulp_v=ds.findUPar(v2);
 
                 if(ulp_u==ulp_v){
                     ans.push_back(false);
@@ -95,6 +97,10 @@ public:
             if(mark==0){
                 ans.push_back(true);
                 ds.unionBySize(u,v);
+            }
+            else{
+                ds.sizee=sizee_copy;
+                ds.parent=parent_copy;
             }
         }
 
