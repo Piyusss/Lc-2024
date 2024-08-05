@@ -1,8 +1,8 @@
 class Solution {
 public:
 void f(int ind,vector<int>ds,int n,vector<int>nums,set<vector<int>>&store){
-    store.insert(ds);
     if(ind==n){
+        store.insert(ds);
         return;
     }
 
@@ -18,7 +18,9 @@ void f(int ind,vector<int>ds,int n,vector<int>nums,set<vector<int>>&store){
         vector<int>ds;
         set<vector<int>>store;
         sort(nums.begin(),nums.end());
+
         f(0,ds,n,nums,store);
+
         vector<vector<int>>final;
         for(auto it:store)final.push_back(it);
         return final;
