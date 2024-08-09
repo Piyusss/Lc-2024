@@ -2,9 +2,9 @@ class Solution {
 public:bool f(vector<vector<int>>& grid,int r,int c){
 
     unordered_set<int>st;
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            int num=grid[i+r][j+c];
+    for(int i=r;i<=r+2;i++){
+        for(int j=c;j<=c+2;j++){
+            int num=grid[i][j];
             if(num<1 || num>9 || st.count(num))return 0;
             else st.insert(num);
         }
