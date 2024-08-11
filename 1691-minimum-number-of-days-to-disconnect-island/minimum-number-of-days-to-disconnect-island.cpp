@@ -34,13 +34,17 @@ void dfs(int i,int j,vector<vector<int>>&vis,vector<vector<int>>& grid){
         }
 
         if(cnt>1 || !mark)return 0;
+        
+        vis.clear();
+        vector<vector<int>>vis2(n,vector<int>(m,0));
+        vector<vector<int>>vis3(n,vector<int>(m,0));
 
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j]==1){
                     grid[i][j]=0;
                     int cnt2=0;
-                    vector<vector<int>>vis2(n,vector<int>(m,0));
+                    vis2=vis3;
                     for(int k=0;k<n;k++){
                         for(int l=0;l<m;l++){
                             if(!vis2[k][l] && grid[k][l]==1){
