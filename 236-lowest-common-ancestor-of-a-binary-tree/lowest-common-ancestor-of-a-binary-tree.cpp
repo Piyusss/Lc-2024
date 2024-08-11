@@ -15,9 +15,8 @@ TreeNode* f(TreeNode* root, TreeNode* p, TreeNode* q){
     TreeNode* lh=f(root->left,p,q);
     TreeNode* rh=f(root->right,p,q);
 
-    if(lh!=NULL && rh!=NULL)return root;
-    else if(lh!=NULL)return lh;
-    else return rh;
+    if(lh && rh)return root;
+    return lh ? lh : rh;
 }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         return f(root,p,q);
