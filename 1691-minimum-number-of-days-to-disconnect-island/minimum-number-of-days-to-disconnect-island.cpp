@@ -33,7 +33,7 @@ void dfs(int i,int j,vector<vector<int>>&vis,vector<vector<int>>& grid){
             }
         }
 
-        if(cnt>1 || cnt==0)return 0;
+        if(cnt>1 || !mark)return 0;
 
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
@@ -49,7 +49,7 @@ void dfs(int i,int j,vector<vector<int>>&vis,vector<vector<int>>& grid){
                             }
                         }
                     }
-                    if(cnt2>1 || cnt2==0)return 1;
+                    if(cnt2>1 || !cnt2)return 1;
                     grid[i][j]=1;
                 }
             }
