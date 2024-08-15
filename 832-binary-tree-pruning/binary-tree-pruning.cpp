@@ -28,10 +28,11 @@ TreeNode* f(TreeNode* &root){
     f(root->left);
     f(root->right);
 
-    if(!root->left && !root->right && root->val==0)return NULL;
     return root;
 }
     TreeNode* pruneTree(TreeNode* root) {
-        return f(root);
+        f(root);
+        if(!root->left && !root->right && root->val==0)return NULL;
+        return root;
     }
 };
