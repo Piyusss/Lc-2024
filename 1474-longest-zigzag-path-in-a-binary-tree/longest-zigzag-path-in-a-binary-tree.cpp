@@ -14,22 +14,15 @@ public:
 
 int maxi=0;
 
-void f(TreeNode* root,int steps,bool toLeft){
+void f(TreeNode* root,int l,int r){
     if(!root)return;
-    maxi=max(maxi,steps);
+    maxi=max(maxi,max(l,r));
 
-    if(toLeft){
-        f(root->left,steps+1,0);
-        f(root->right,1,1);
-    }
-    else{
-        f(root->right,steps+1,1);
-        f(root->left,1,0);
-    }
+    f(root->left,r+1,0);
+    f(root->right,0,l+1);
 }
     int longestZigZag(TreeNode* root) {
         f(root,0,0);
-        f(root,0,1);
         return maxi;
     }
 };
