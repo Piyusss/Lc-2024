@@ -17,6 +17,6 @@ int f(int num,int copy,int n){
     int minSteps(int n){
         if(n==1)return 0;
         memset(dp,-1,sizeof(dp));
-        return 1+f(1,1,n);
+        return 2+f(2,1,n);
     }
 };
