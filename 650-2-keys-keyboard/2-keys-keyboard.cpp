@@ -5,7 +5,7 @@ int dp[1001][1001];
 
 int f(int num,int copy,int n){
     if(num==n)return 0;
-    if(num>n)return INT_MAX-30;
+    if(num>n)return 1e3;
 
     if(dp[num][copy]!=-1)return dp[num][copy];
 
