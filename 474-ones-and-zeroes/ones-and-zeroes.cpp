@@ -7,7 +7,7 @@ int s,n,m;
 int f(int idx,vector<string>& strs,int one,int zero){
     if(idx==s)return 0;
 
-    if(dp[idx][one][zero]!=-1)return dp[idx][one][zero];
+    if(~dp[idx][one][zero])return dp[idx][one][zero];
 
     return dp[idx][one][zero] = max((one+strs[idx].size()-count(strs[idx].begin(),strs[idx].end(),'0')<=n && zero+count(strs[idx].begin(),strs[idx].end(),'0')<=m ? 1+f(idx+1,strs,one+strs[idx].size()-count(strs[idx].begin(),strs[idx].end(),'0'),zero+count(strs[idx].begin(),strs[idx].end(),'0')) : 0),f(idx+1,strs,one,zero));
     
