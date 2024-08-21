@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& nums) {
+    int largestSquareArea(vector<int>& nums) {
         int n=nums.size();
 
         vector<int>ls(n),rs(n);
@@ -40,7 +40,7 @@ public:
                 if(matrix[i][j]=='1')histo[j]++;
                 else histo[j]=0;
             }
-            int area=largestRectangleArea(histo);
+            int area=largestSquareArea(histo);
             maxi=max(maxi,area);
         }
         return maxi;
