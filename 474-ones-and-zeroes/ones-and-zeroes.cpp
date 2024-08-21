@@ -2,10 +2,10 @@ class Solution {
 public:
 
 int dp[601][101][101];
-int si,n,m;
+int s,n,m;
 
 int f(int idx,vector<string>& strs,int one,int zero){
-    if(idx==si)return 0;
+    if(idx==s)return 0;
 
     if(dp[idx][one][zero]!=-1)return dp[idx][one][zero];
 
@@ -13,7 +13,7 @@ int f(int idx,vector<string>& strs,int one,int zero){
     
 }
     int findMaxForm(vector<string>& strs, int M, int N){
-        n=N;m=M;si=strs.size();
+        n=N;m=M;s=strs.size();
         memset(dp,-1,sizeof(dp));
         return f(0,strs,0,0);
     }
