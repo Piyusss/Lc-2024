@@ -10,7 +10,7 @@ int f(int idx,vector<int>& nums){
     if(~dp[idx])return dp[idx];
 
     int res=INT_MIN;
-    if(idx<n)res=max(res, (nums[idx]) - f(idx+1,nums));
+    res=max(res, (nums[idx]) - f(idx+1,nums));
     if(idx+1<n)res=max(res, (nums[idx] + nums[idx+1]) - f(idx+2,nums));
     if(idx+2<n)res=max(res, (nums[idx] + nums[idx+1] + nums[idx+2]) - f(idx+3,nums));
 
