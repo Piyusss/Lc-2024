@@ -20,7 +20,7 @@ double f(int soupALeft,int soupBLeft,vector<vector<double>>& dp){
     return dp[soupALeft][soupBLeft]= 0.25*res;
 }
     double soupServings(int n){
-        if(n>=5000)return 1;
+        if(n>=4276)return 1;
         vector<vector<double>>dp(n+1,vector<double>(n+1,-1.0));
         return f(n,n,dp);
     }
