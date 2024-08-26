@@ -14,16 +14,12 @@ int M=1E9+7;
                 cnt++;
             }
             else{
-                ll wait=(cnt)*(cnt+1)/2;
-                wait=wait%M;
-                res= (res%M+ wait%M )%M;
+                res= (res%M+ ((cnt)*(cnt+1)/2)%M )%M;
                 cnt=1;
             }
         }
 
-        ll wait=((cnt%M)*((cnt+1)%M)/2)%M;
-        wait=wait%M;
-        res= (res%M+ wait%M )%M;
+        res= (res%M+ ((cnt)*(cnt+1)/2)%M )%M;
 
         return res%M;
     }
