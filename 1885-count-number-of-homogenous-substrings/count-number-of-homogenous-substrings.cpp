@@ -10,13 +10,8 @@ int M=1E9+7;
         ll res=0;
 
         for(ll i=0;i<n-1;i++){
-            if(s[i]==s[i+1]){
-                cnt++;
-            }
-            else{
-                res= (res%M+ ((cnt)*(cnt+1)/2)%M )%M;
-                cnt=1;
-            }
+            if(s[i]==s[i+1]) cnt++;
+            else res= (res%M+ ((cnt)*(cnt+1)/2)%M )%M,cnt=1;
         }
 
         res= (res%M+ ((cnt)*(cnt+1)/2)%M )%M;
