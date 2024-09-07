@@ -54,7 +54,7 @@ void f(TreeNode* root){
             vector<int>temp=ans[i];
             string st="";
             for(auto &it:temp)st+=to_string(it);
-            if(st.find(haveToBeFound)!=std::string::npos)return 1;
+            if(st.find(haveToBeFound)!=string::npos)return 1;
         }
 
         return 0;
