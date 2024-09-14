@@ -7,10 +7,7 @@ public:
         int cnt=0,maxi=0;
         for(int i=0;i<n;i++){
             if(nums[i]==maxi_el)cnt++;
-            else{
-                maxi=max(maxi,cnt);
-                cnt=0;
-            }
+            else maxi=max(maxi,cnt)-(cnt=0);
         }
 
         maxi=max(maxi,cnt);
