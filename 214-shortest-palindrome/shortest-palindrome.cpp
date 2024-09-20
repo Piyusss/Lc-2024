@@ -4,7 +4,7 @@ public:
     string shortestPalindrome(string s) {
         int n=s.size();
 
-        string t1="",t2="",copy=s;
+        string copy=s;
         reverse(copy.begin(),copy.end());
 
         for(int i=0;i<n;i++){
