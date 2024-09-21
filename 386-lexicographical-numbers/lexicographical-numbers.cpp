@@ -1,18 +1,13 @@
 class Solution {
 public:
 
-static bool comp(string &a,string &b){
-    return a<b;
+static bool comp(int a,int b){
+    return to_string(a)<to_string(b);
 }
-    vector<int> lexicalOrder(int n) {
-        vector<string>v;
-        for(int i=1;i<=n;i++)v.push_back(to_string(i));
-
+    vector<int> lexicalOrder(int n){
+        vector<int>v;
+        for(int i=1;i<=n;)v.push_back(i++);
         sort(v.begin(),v.end(),comp);
-        
-        vector<int>res;
-        for(auto &it:v)res.push_back(stoi(it));
-
-        return res;
+        return v;
     }
 };
