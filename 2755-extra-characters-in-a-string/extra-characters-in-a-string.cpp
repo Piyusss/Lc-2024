@@ -2,21 +2,24 @@ class Solution {
 public:
 
 int n;
-int dp[100];
+int dp[51];
 
 int f(int i,string &s,unordered_set<string> &st){
     if(i>=n)return 0;
 
     if(dp[i]!=-1)return dp[i];
 
-    int res=1+f(i+1,s,st);
-
+    string curStr="";
+    int mini=n;
     for(int j=i;j<n;j++){
-        string cur=s.substr(i,j-i+1);
-        if(st.count(cur)) res=min(res,f(j+1,s,st));
+        curStr+=s[j];
+        int curExtra=(st.find(curStr)==st.end()) ? curStr.size() : 0;
+        int nextExtra=f(j+1,s,st);
+        int tot=curExtra + nextExtra;
+        mini = min(mini,tot);
     }
     
-    return dp[i]=res;
+    return dp[i]=mini;
 }
     int minExtraChar(string s, vector<string>& d){
         n=s.size();
