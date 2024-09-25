@@ -16,9 +16,9 @@ public:
     vector<int> sumPrefixScores(vector<string>& words){
         TrieNode* root=new TrieNode();
 
-        for (auto &word:words) {
+        for(auto &word:words){
             TrieNode* node=root;
-            for (char &c:word) {
+            for(char &c:word){
                 int idx=c-'a';
                 if(node->children[idx]==NULL) {
                     node->children[idx]=new TrieNode();
