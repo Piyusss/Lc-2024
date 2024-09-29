@@ -9,22 +9,20 @@ public:
     }
     
     void inc(string key) {
-        int n=mp[key];
         mp[key]++;
-        st.erase({n,key});
-        st.insert({n+1,key});
+        st.erase({mp[key]-1,key});
+        st.insert({mp[key],key});
     }
     
     void dec(string key) {
-        int n=mp[key];
         mp[key]--;
         if(mp[key]==0){
-            st.erase({n,key});
+            st.erase({mp[key]+1,key});
             mp.erase(key);
         }
         else{
-            st.erase({n,key});
-            st.insert({n-1,key});
+            st.erase({mp[key]+1,key});
+            st.insert({mp[key],key});
         }
     }
     
