@@ -11,7 +11,6 @@ public:
             else st.insert(ext);
         }
 
-        vector<string>ans(res.begin(),res.end());
-        return ans;
+        return {res.begin(),res.end()};
     }
 };
