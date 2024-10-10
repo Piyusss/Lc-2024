@@ -16,7 +16,7 @@ public:
         int i=0,j=0;
         
         while(j<n){
-            while(i<j && nums[i]>maxiFromRight[j])i++;
+            if(i<j && nums[i]>maxiFromRight[j])i++;
             res=max(res,j-i);
             j++;
         }
