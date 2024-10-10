@@ -13,7 +13,7 @@ public:
         }
 
         int res=0;
-        int i=0,j=0;
+        int i=0,j=1;
         
         while(j<n){
             if(i<j && nums[i]>maxiFromRight[j])i++;
