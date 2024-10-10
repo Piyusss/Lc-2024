@@ -11,8 +11,7 @@ public:
             else st.insert(ext);
         }
 
-        vector<string>ans;
-        for(auto &it:res) ans.push_back(it);
+        vector<string>ans(res.begin(),res.end());
         return ans;
     }
 };
