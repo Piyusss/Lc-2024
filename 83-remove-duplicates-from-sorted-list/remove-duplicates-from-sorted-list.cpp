@@ -12,20 +12,16 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head){
         set<int>nodes_c;
-        vector<int>nodes;
 
         ListNode* temp=head;
-
         while(temp){
             nodes_c.insert(temp->val);
             temp=temp->next;
         }
 
-        for(auto &it:nodes_c) nodes.push_back(it);
-
         ListNode* dummyNode=new ListNode(-1);
         ListNode* dummyNodeMove=dummyNode;
-        for(auto &it:nodes){
+        for(auto &it:nodes_c){
             dummyNodeMove->next=new ListNode(it);
             dummyNodeMove=dummyNodeMove->next;
         }
