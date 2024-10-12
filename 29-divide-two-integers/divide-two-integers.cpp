@@ -15,7 +15,7 @@ public:
         ll res=0;
 
         while(n >= d){
-            int cnt=0;
+            ll cnt=0;
             while(n >= (d<<(cnt+1))) cnt++;
 
             res += 1<<cnt;
@@ -25,6 +25,6 @@ public:
         if(res==(1<<31)) return sign ? INT_MAX : INT_MIN;
 
         return sign ? res : -res;
-        
+
     }
 };
