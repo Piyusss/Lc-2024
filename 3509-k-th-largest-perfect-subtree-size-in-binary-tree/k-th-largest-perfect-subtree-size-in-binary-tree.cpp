@@ -14,7 +14,6 @@ public:
 
 vector<int>kthLargest;
 unordered_set<TreeNode*>st;
-int nice=0;
 
 //n=(2^h+1)-1;
 
@@ -30,7 +29,6 @@ int f(TreeNode* root){
     }
     else st.insert(root);
 
-    
     return l+r+1;
 
 }
