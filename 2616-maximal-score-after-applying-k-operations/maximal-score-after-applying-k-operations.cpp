@@ -17,8 +17,8 @@ public:
             pq.pop();
 
             res+=it;
-            // cout<< static_cast<int>(ceil(static_cast<double>(it)/3)) <<" ";
-            pq.push(static_cast<int>(ceil(static_cast<double>(it)/3)));
+            
+            pq.push((it+3-1)/3);
         }
 
         return res;
