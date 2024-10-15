@@ -12,6 +12,7 @@
 class Solution {
 public:
 
+vector<int>ans;
 vector<pair<int,int>>res;
 unordered_map<int,int>mp;
 
@@ -36,18 +37,13 @@ static bool comp(pair<int,int>a,pair<int,int>b){
 
         f(root);
 
-        for(auto &it:mp){
-            res.push_back({it.first,it.second}); // subTreeSum , Freq
-        }
+        for(auto &it:mp) res.push_back({it.first,it.second});
         sort(res.begin(),res.end(),comp);
 
-        for(auto &it:res) cout<<it.first<<" "<<it.second<<endl;
-
-        vector<int>ans;
-        int mark=res[0].second;
         ans.push_back(res[0].first);
+
         for(int i=1;i<res.size();i++){
-            if(res[i].second==mark)ans.push_back(res[i].first);
+            if(res[i].second==res[0].second)ans.push_back(res[i].first);
             else break;
         }
 
