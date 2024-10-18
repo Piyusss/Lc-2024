@@ -20,8 +20,7 @@ void f(vector<int>&nums,int idx,int res){
         t=nums[0];
         for(int i=1;i<n;i++) t = t | nums[i];
 
-        int res=0;
-        f(nums,0,res);
+        f(nums,0,0);
 
         return cnt;
         
