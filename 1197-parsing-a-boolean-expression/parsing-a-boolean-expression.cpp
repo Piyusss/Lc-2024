@@ -20,7 +20,7 @@ char f(vector<char>&store,char op){
         vector<char>store;
 
         for(auto &it:s){
-            if(it=='t' || it=='f' || it=='&' || it=='|' || it=='!' || it=='(') st.push(it);
+            if(it!=')' && it!=',') st.push(it);
 
             if(it==')'){
                 store.clear();
