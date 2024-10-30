@@ -27,8 +27,8 @@ void f(vector<int>&nums,int n,vector<int>&dp){
 
         int res=INT_MAX;
         for(int i=1;i<n-1;i++){
-            int mountainArray= dpLeft[i] + dpRight[i] - 1;
-            if(mountainArray >= 3 && dpLeft[i]>=2 && dpRight[i]>=2) res=min(res,n-mountainArray);
+            int mountainArraySize= dpLeft[i] + dpRight[i] - 1;
+            if(mountainArraySize >= 3 && dpLeft[i]>=2 && dpRight[i]>=2) res=min(res,n-mountainArraySize);
         }
 
         return res;
