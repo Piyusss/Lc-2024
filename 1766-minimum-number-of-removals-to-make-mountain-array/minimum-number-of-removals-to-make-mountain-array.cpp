@@ -1,6 +1,7 @@
 class Solution {
 public:
 
+int flag=0;
 void f(vector<int>&nums,int n,vector<int>&dp){
     //LIS_it_izz
     for(int i=0;i<n;i++){
@@ -10,6 +11,9 @@ void f(vector<int>&nums,int n,vector<int>&dp){
             }
         }
     }
+    if(flag) reverse(dp.begin(),dp.end());
+    flag+=1;
+    return;
 }
 
     int minimumMountainRemovals(vector<int>& nums) {
@@ -22,7 +26,6 @@ void f(vector<int>&nums,int n,vector<int>&dp){
         f(nums,n,dpRight);
 
         int res=INT_MAX;
-        reverse(dpRight.begin(),dpRight.end());
         for(int i=1;i<n-1;i++){
             int mountainArray= dpLeft[i] + dpRight[i] - 1;
             if(mountainArray >= 3 && dpLeft[i]>=2 && dpRight[i]>=2) res=min(res,n-mountainArray);
