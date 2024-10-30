@@ -11,9 +11,9 @@ void f(vector<int>&nums,int n,vector<int>&dp){
             }
         }
     }
-    if(flag) reverse(dp.begin(),dp.end());
-    flag+=1;
-    return;
+    
+    reverse(nums.begin(),nums.end());
+    if(flag++) reverse(dp.begin(),dp.end());
 }
 
     int minimumMountainRemovals(vector<int>& nums) {
@@ -22,7 +22,6 @@ void f(vector<int>&nums,int n,vector<int>&dp){
         vector<int>dpLeft(n,1),dpRight(n,1);
 
         f(nums,n,dpLeft);
-        reverse(nums.begin(),nums.end());
         f(nums,n,dpRight);
 
         int res=INT_MAX;
