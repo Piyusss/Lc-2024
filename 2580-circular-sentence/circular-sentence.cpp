@@ -8,11 +8,6 @@ public:
         while(ss>>token) v.push_back(token);
 
         int n=v.size();
-        if(n==1){
-            if(v[0][0]==v[0][v[0].size()-1]) return 1;
-            return 0;
-        }
-
         for(int i=0;i<n-1;i++){
             string a=v[i];
             string b=v[i+1];
@@ -20,6 +15,6 @@ public:
         }
 
         return v[0][0] == v[n-1][v[n-1].size()-1] ? 1 : 0 ;
-        
+
     }
 };
