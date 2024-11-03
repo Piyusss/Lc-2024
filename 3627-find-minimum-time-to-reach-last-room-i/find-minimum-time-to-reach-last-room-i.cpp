@@ -1,7 +1,6 @@
 class Solution {
 public:
 
-
 int n,m;
 int mini=INT_MAX;
 vector<vector<int>>dir={{0,1},{0,-1},{-1,0},{1,0}};
@@ -9,7 +8,6 @@ vector<vector<int>>dir={{0,1},{0,-1},{-1,0},{1,0}};
     int minTimeToReach(vector<vector<int>>& grid) {
         n=grid.size();
         m=grid[0].size();
-        cout<<n<<" "<<m;
 
         priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
         pq.push({0,{0,0}});
@@ -28,12 +26,11 @@ vector<vector<int>>dir={{0,1},{0,-1},{-1,0},{1,0}};
             for(auto &it:dir){
                 int nx=x+it[0];
                 int ny=y+it[1];
-                
                 if(nx>=0 && ny>=0 && nx<n && ny<m){
-                    int wait= max(d,grid[nx][ny]) + 1;
-                    if(wait<dis[nx][ny]){
-                        dis[nx][ny] = wait;
-                        pq.push({wait,{nx,ny}});
+                    int wait= (dis[x][y] < grid[nx][ny]) ? (grid[nx][ny]-dis[x][y]) : 0 ; 
+                    if(dis[x][y]+1+wait<dis[nx][ny]){
+                        dis[nx][ny] = dis[x][y]+1+wait;
+                        pq.push({dis[nx][ny],{nx,ny}});
                     }
                 }
             }
