@@ -8,9 +8,8 @@ public:
             if(s[i]!=s[i+1]){
                 cnt+=1;
                 s[i+1]=s[i];
-                i+=1;
             }
-            else i+=1;
+            i+=1;
         }
 
         return cnt;
