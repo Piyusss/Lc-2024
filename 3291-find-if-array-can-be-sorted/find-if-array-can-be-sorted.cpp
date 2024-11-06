@@ -11,7 +11,7 @@ public:
     bool canSortArray(vector<int>& nums) {
         int n=nums.size(),move=0;
 
-        vector<int>count(101);
+        vector<int>count(n);
         for(auto &it : nums) count[move++] = __builtin_popcount(it);
 
         for(int i=0;i<n;i++){
