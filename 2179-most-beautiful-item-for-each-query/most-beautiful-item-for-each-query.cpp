@@ -14,11 +14,8 @@ public:
             auto idx=upper_bound(items.begin(),items.end(),flag);
             int prevIdx=(idx-items.begin())-1;
 
-            if(idx != items.end()){
-                if(prevIdx>=0) res[id++]=maxBeauty[prevIdx];
-                else if(prevIdx==-1) res[id++]=0;
-            }
-            else res[id++]=maxBeauty[prevIdx];
+            if(prevIdx>=0) res[id]=maxBeauty[prevIdx];
+            id+=1;
         }
 
         return res;
