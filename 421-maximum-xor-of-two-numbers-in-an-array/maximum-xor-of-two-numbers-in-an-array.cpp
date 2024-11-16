@@ -1,65 +1,68 @@
 class Solution {
 public:
-    struct trieNode{
-        trieNode* left;
-        trieNode* right;
-    };
-    void insert(trieNode* root,int &num){
-        trieNode* crawl=root;
-        for(int i=31;i>=0;i--){
-            int ith_bit=(num>>i)&1;
-            if(ith_bit==0){
-                if(!crawl->left)crawl->left=new trieNode();
-                crawl=crawl->left;
+
+struct Node {
+    Node* links[2]; 
+    
+    bool containsKey(int bit) {
+        return (links[bit] != NULL); 
+    }
+
+    Node* get(int bit) {
+        return links[bit]; 
+    }
+
+    void put(int bit, Node* node) {
+        links[bit] = node; 
+    }
+};
+
+class Trie {
+private:
+    Node* root;
+public:
+    Trie() {
+        root = new Node();
+    }
+    
+    void insert(int num) {
+        Node* node = root; 
+        for (int i = 31; i >= 0; i--) { 
+            int bit = (num >> i) & 1; 
+            if (!node->containsKey(bit)) { 
+                node->put(bit, new Node()); 
             }
-            else{
-                if(!crawl->right)crawl->right=new trieNode();
-                crawl=crawl->right;
-            }
+            node = node->get(bit); 
         }
     }
 
-    int f(trieNode* root,int &num){
-        int maxi=0;
-        trieNode* crawl=root;
+    int getMax(int num) {
+        Node* node = root;
 
-        for(int i=31;i>=0;i--){
-            int ith_bit=(num>>i)&1;
-            if(ith_bit==1){
-                if(crawl->left){
-                    maxi+=pow(2,i);
-                    crawl=crawl->left;
-                }
-                else{
-                    crawl=crawl->right;
-                }
+        int maxNum = 0;
+        for (int i = 31; i >= 0; i--) { 
+            int bit = (num >> i) & 1; 
+
+            if (node->containsKey(1 - bit)) { 
+                maxNum |= (1 << i); 
+                node = node->get(1 - bit);
             }
-            else{
-                if(crawl->right){
-                    maxi+=pow(2,i);
-                    crawl=crawl->right;
-                }
-                else{
-                    crawl=crawl->left;
-                }
-            }
+            else node = node->get(bit);
         }
-        return maxi;
+        
+        return maxNum; 
     }
+};
 
     int findMaximumXOR(vector<int>& nums) {
-        //Method-01:Brute force- O(N^2)
-
-        //Method-02:
         int n=nums.size();
-        trieNode* root=new trieNode();
-        for(auto &it:nums){
-            insert(root,it);
-        }
+
+        Trie trie;
+        for(auto &it:nums) trie.insert(it);
+
         int ans=0;
-        for(auto &it:nums){
-            ans=max(ans,f(root,it));
-        }
+        for(auto &it:nums) ans=max(ans,trie.getMax(it));
+
         return ans;
     }
 };
