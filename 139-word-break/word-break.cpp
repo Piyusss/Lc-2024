@@ -1,5 +1,6 @@
 int n;
 int dp[301];
+string remTar,wait;
 
 struct Node {
     Node* links[26];
@@ -84,14 +85,11 @@ public:
         if(dp[idx]!=-1) return dp[idx];
 
         bool res=0;
-        string remTar=s.substr(idx);
+        remTar=s.substr(idx);
         int lenInTrie=findLen(remTar);
 
         for(int i=1;i<=lenInTrie;i+=1){
-            string wait=s.substr(idx,i);
-            if(!search(wait)) continue;
-            bool nextRec=f(st,s,idx+i);
-            if(nextRec) return 1;
+            if(search(s.substr(idx,i)) && f(st,s,idx+i)) return 1;
         }
         return dp[idx] = 0;
     }
