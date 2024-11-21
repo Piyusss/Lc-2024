@@ -1,4 +1,5 @@
 int n;
+bool res;
 int dp[301];
 string remTar,wait;
 
@@ -84,7 +85,7 @@ public:
 
         if(dp[idx]!=-1) return dp[idx];
 
-        bool res=0;
+        res=0;
         remTar=s.substr(idx);
         int lenInTrie=findLen(remTar);
 
