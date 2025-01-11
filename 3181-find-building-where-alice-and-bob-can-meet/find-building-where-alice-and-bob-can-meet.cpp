@@ -81,8 +81,10 @@ public:
 
         vector<int>res;
         for(auto &it:queries){
-            int a=min(it[0],it[1]);
-            int b=max(it[0],it[1]);
+            int a=it[0];
+            int b=it[1];
+
+            if(a>b) swap(a,b);
 
             if(a==b){
                 res.push_back(b);continue;
