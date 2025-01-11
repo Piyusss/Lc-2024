@@ -92,18 +92,18 @@ public:
 
             int l=b+1;
             int r=n-1;
-            int temp=INT_MAX;
+            int temp=-1;
             while(l<=r){
                 int mid=l+(r-l)/2;
                 int buildingIdx=t.query(l,mid,heights);
 
                 if(heights[buildingIdx]>heights[a] && heights[buildingIdx]>heights[b]){
-                    temp=min(temp,buildingIdx);
+                    temp=buildingIdx;
                     r=mid-1;
                 }
                 else l=mid+1;
             }
-            res.push_back(temp==INT_MAX ? -1 : temp);
+            res.push_back(temp);
         }
 
         return res;
