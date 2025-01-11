@@ -86,10 +86,7 @@ public:
 
             if(a>b) swap(a,b);
 
-            if(a==b){
-                res.push_back(b);continue;
-            }
-            if(heights[b]>heights[a]){
+            if(a==b || heights[b]>heights[a]){
                 res.push_back(b);continue;
             }
 
