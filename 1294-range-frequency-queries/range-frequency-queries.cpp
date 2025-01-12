@@ -46,12 +46,11 @@ private:
         return left + right;
     }
 
-    void update(ll node, ll start, ll end, ll idx, ll old_value, ll new_value)
+    void update(ll node, ll start, ll end, ll idx, ll new_value)
     {
         if (start == end)
         {
-            tree[node][old_value]--;
-            if (tree[node][old_value] == 0) tree[node].erase(old_value);
+            tree[node].clear();
             tree[node][new_value]++;
             arr[start] = new_value;
         }
@@ -60,11 +59,11 @@ private:
             ll mid = (start + end) / 2;
             if (idx <= mid)
             {
-                update(2 * node + 1, start, mid, idx, old_value, new_value);
+                update(2 * node + 1, start, mid, idx, new_value);
             }
             else
             {
-                update(2 * node + 2, mid + 1, end, idx, old_value, new_value);
+                update(2 * node + 2, mid + 1, end, idx, new_value);
             }
 
             tree[node].clear();
@@ -91,9 +90,9 @@ public:
         return query(0, 0, n - 1, l, r, value);
     }
 
-    void update(ll idx, ll old_value, ll new_value)
+    void update(ll idx, ll new_value)
     {
-        update(0, 0, n - 1, idx, old_value, new_value);
+        update(0, 0, n - 1, idx, new_value);
     }
 };
 
