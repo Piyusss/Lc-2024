@@ -46,30 +46,37 @@ private:
         return left + right;
     }
 
-    unordered_map<ll, ll> range_freq(ll node, ll start, ll end, ll l, ll r)
+    void update(ll node, ll start, ll end, ll idx, ll old_value, ll new_value)
     {
-        if (r < start || l > end)
+        if (start == end)
         {
-            return {};
+            tree[node][old_value]--;
+            if (tree[node][old_value] == 0) tree[node].erase(old_value);
+            tree[node][new_value]++;
+            arr[start] = new_value;
         }
-        if (l <= start && end <= r)
+        else
         {
-            return tree[node];
-        }
-        ll mid = (start + end) / 2;
-        unordered_map<ll, ll> left_map = range_freq(2 * node + 1, start, mid, l, r);
-        unordered_map<ll, ll> right_map = range_freq(2 * node + 2, mid + 1, end, l, r);
+            ll mid = (start + end) / 2;
+            if (idx <= mid)
+            {
+                update(2 * node + 1, start, mid, idx, old_value, new_value);
+            }
+            else
+            {
+                update(2 * node + 2, mid + 1, end, idx, old_value, new_value);
+            }
 
-        unordered_map<ll, ll> result;
-        for (auto it = left_map.begin(); it != left_map.end(); ++it)
-        {
-            result[it->first] += it->second;
+            tree[node].clear();
+            for (auto it = tree[2 * node + 1].begin(); it != tree[2 * node + 1].end(); ++it)
+            {
+                tree[node][it->first] += it->second;
+            }
+            for (auto it = tree[2 * node + 2].begin(); it != tree[2 * node + 2].end(); ++it)
+            {
+                tree[node][it->first] += it->second;
+            }
         }
-        for (auto it = right_map.begin(); it != right_map.end(); ++it)
-        {
-            result[it->first] += it->second;
-        }
-        return result;
     }
 
 public:
@@ -84,10 +91,9 @@ public:
         return query(0, 0, n - 1, l, r, value);
     }
 
-    ll distinct_count(ll l, ll r)
+    void update(ll idx, ll old_value, ll new_value)
     {
-        unordered_map<ll, ll> freq_map = range_freq(0, 0, n - 1, l, r);
-        return freq_map.size();
+        update(0, 0, n - 1, idx, old_value, new_value);
     }
 };
 
