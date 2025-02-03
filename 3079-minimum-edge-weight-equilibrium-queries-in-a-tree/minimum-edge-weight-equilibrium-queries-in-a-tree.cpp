@@ -70,24 +70,22 @@ public:
 
 class Solution {
 public:
-    vector<int> res;
-    vector<int> g[10000];
+    vector<int>res;
+    vector<int>g[10000];
     vector<pair<int,int>>gw[10000];
     int height[10000];
     int dp[10000][27];
 
-    void dfs(int node, int p, int wt){
-        for(int i=1;i<=26;i++){
-            dp[node][i] = (p == -1) ? 0 : dp[p][i];
-        }
-        if(wt != -1) dp[node][wt]++;
-
+    void dfs(int node, int p){
         for(auto &c:gw[node]){
             int child=c.first;
-            int w=c.second;
+            int wt=c.second;
+
             if(child != p){
+                for(int i=1;i<=26;i++) dp[child][i]=dp[node][i];
+                dp[child][wt]++;
                 height[child]=height[node]+1;
-                dfs(child,node,w);
+                dfs(child,node);
             }
         }
     }
@@ -105,7 +103,7 @@ public:
         }
 
         Tree tree(g,n);
-        dfs(0,-1,-1);
+        dfs(0,-1);
 
         for(auto &c:queries){
             int u=c[0],v=c[1];
