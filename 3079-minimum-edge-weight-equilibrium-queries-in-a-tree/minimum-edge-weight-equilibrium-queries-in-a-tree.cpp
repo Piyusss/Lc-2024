@@ -68,36 +68,40 @@ public:
     }
 };
 
+
 class Solution {
 public:
-    vector<int>res;
-    vector<int>g[10000];
-    vector<pair<int,int>>gw[10000];
-    int height[10000];
-    int dp[10000][27];
 
-    void dfs(int node, int p){
-        for(auto &c:gw[node]){
-            int child=c.first;
-            int wt=c.second;
+int dp[10000][27];
+vector<int>g[10000];
+int height[10000];
+vector<int>res;
+vector<pair<int,int>>gw[10000];
 
-            if(child != p){
-                for(int i=1;i<=26;i++) dp[child][i]=dp[node][i];
-                dp[child][wt]++;
-                height[child]=height[node]+1;
-                dfs(child,node);
+void dfs(int node,int p){
+    for(auto &c:gw[node]){
+        int child=c.first;
+        int wt=c.second;
+
+        if(child != p){
+            height[child]=height[node]+1;
+            for(int j=1;j<=26;j++){
+                dp[child][j]=dp[node][j];
             }
+            dp[child][wt] += 1;
+            dfs(child,node);
         }
     }
+}
 
     vector<int> minOperationsQueries(int n, vector<vector<int>>& edges, vector<vector<int>>& queries) {
-        memset(height,0,sizeof(height));
-        memset(dp,0,sizeof(dp));
-        
-        for(auto &c:edges) {
-            int u=c[0],v=c[1],w=c[2];
+        for(auto &c:edges){
+            int u=c[0];
+            int v=c[1];
+            int w=c[2];
             g[u].push_back(v);
             g[v].push_back(u);
+            
             gw[u].push_back({v,w});
             gw[v].push_back({u,w});
         }
@@ -106,18 +110,20 @@ public:
         dfs(0,-1);
 
         for(auto &c:queries){
-            int u=c[0],v=c[1];
-            int lcaOfUandV=tree.lca(u,v);
+            int ai=c[0];
+            int bi=c[1];
 
-            int noOfEdgesBwUandV=height[u] + height[v] - 2*height[lcaOfUandV];
+            int lcaOfAiandBi=tree.lca(ai,bi);
+
+            int totalEdgesBwAiandBi= height[ai] + height[bi] - 2*(height[lcaOfAiandBi]);
 
             int maxi=0;
-            for(int i=1;i<=26;i++){
-                int freq=dp[u][i] + dp[v][i] - 2*dp[lcaOfUandV][i];
+            for(int j=1;j<=26;j++){
+                int freq=dp[ai][j] + dp[bi][j] - 2*(dp[lcaOfAiandBi][j]);
                 maxi=max(maxi,freq);
             }
 
-            res.push_back(noOfEdgesBwUandV-maxi);
+            res.push_back(totalEdgesBwAiandBi - maxi);
         }
 
         return res;
