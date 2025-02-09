@@ -9,6 +9,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+const int MAXN=1E5;
 using ll=long long;
 
 class SegmentTree
@@ -64,32 +66,26 @@ public:
     }
 };
 
-
-
 class Solution {
 public:
 
-vector<ll>eulerTour,heightsTour;
-int inTime[100000+1];
-int outTime[100000+1];
-int height[100000+1];
+vector<ll>eulerTour;
+int inTime[MAXN+1],outTime[MAXN+1],height[MAXN+1];
 vector<int>res;
 int cnt=1;
-int tot=0;
 
-void dfs(TreeNode* root){
+void eulerDfs(TreeNode* root){
     inTime[root->val] = cnt++;
-    eulerTour.push_back(root->val);
+    eulerTour.push_back(height[root->val]);
 
-    if(root->left) dfs(root->left);
-    if(root->right) dfs(root->right);
+    if(root->left) eulerDfs(root->left);
+    if(root->right) eulerDfs(root->right);
 
-    outTime[root->val] = cnt ++;
-    eulerTour.push_back(root->val);
+    outTime[root->val] = cnt++;
+    eulerTour.push_back(height[root->val]);
 }
 
 void heightDfs(TreeNode* root){
-    tot++;
 
     if(root->left){
         height[root->left->val] = height[root->val]+1;
@@ -103,35 +99,14 @@ void heightDfs(TreeNode* root){
 }
 
     vector<int> treeQueries(TreeNode* root, vector<int>& queries) {
-        // memset(height,0,sizeof(height));
         heightDfs(root);
 
-        // for(int i=1;i<=tot;i++) cout<<height[i]<<" ";
-        // cout<<"\n";
-
         eulerTour.push_back(-1);
-        heightsTour.push_back(-1);
-        dfs(root);
-        int s=eulerTour.size();
-        for(int i=1;i<s;i++){
-            // cout<<eulerTour[i]<<" ";
-            heightsTour.push_back(height[eulerTour[i]]);
-        }
-        // cout<<"\n";
-        // for(int i=1;i<s;i++){
-        //     cout<<height[i]<<" ";
-        // }
-        // cout<<"\n"<<"\n";
-        SegmentTree t(heightsTour);
+        eulerDfs(root);
 
+        SegmentTree t(eulerTour);
         for(auto &c:queries){
-            int leftIdx=inTime[c];
-            int rightIdx=outTime[c];
-            // cout<<leftIdx<<" "<<rightIdx<<"\n";
-            int a=t.query(1,leftIdx-1);
-            int b=t.query(rightIdx+1,s-1);
-            // cout<<a<<" "<<b<<"\n"<<"\n";
-            res.push_back(max(a,b));
+            res.push_back(max(t.query(1,inTime[c]-1),t.query(outTime[c]+1,cnt-1)));
         }
 
         return res;
