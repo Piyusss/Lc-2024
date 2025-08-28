@@ -1,5 +1,5 @@
 class Solution {
-    void f3(const vector<vector<int>>& grid, unordered_map<int, vector<int>>& d){
+    void f3(vector<vector<int>>& grid, unordered_map<int, vector<int>>& d){
         int n=grid.size();
         for(int i=0;i<n;i++) for(int j=0;j<n;j++) d[i-j].push_back(grid[i][j]);
     }
