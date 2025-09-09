@@ -1,5 +1,5 @@
 using ll=long long;
-const int MOD=1000000007;
+const int MOD=1E9+7;
 
 class Solution{
 public:
