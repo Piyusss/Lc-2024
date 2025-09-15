@@ -2,12 +2,7 @@ class Solution {
 public:
 
     bool f(string &s,unordered_map<char,int>&mp){
-        int n=s.size();
-
-        for(auto &c:s){
-            if(mp[c]) return 0;
-        }
-
+        for(auto &c:s) if(mp[c]) return 0;
         return 1;
     }
 
@@ -19,9 +14,7 @@ public:
         
         string w;
         stringstream ss(text);
-        while(ss>>w){
-            if(f(w,mp)) cnt++;
-        }
+        while(ss>>w) if(f(w,mp)) cnt++;
 
         return cnt;
     }
