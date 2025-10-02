@@ -1,13 +1,10 @@
-
 class DisjointSet {
-    public:
     vector<int> rank, parent, sizee;
-    int flag;
+public:
     DisjointSet(int n) {
         rank.resize(n + 1, 0);
         parent.resize(n + 1);
-        sizee.resize(n + 1,1);
-        flag=n;
+        sizee.resize(n + 1);
         for (int i = 0; i <= n; i++) {
             parent[i] = i;
             sizee[i] = 1;
@@ -34,46 +31,48 @@ class DisjointSet {
             parent[ulp_v] = ulp_u;
             rank[ulp_u]++;
         }
-        flag--;
     }
 
-    bool unionBySize(int u, int v,int child_ka_parent,int parent_ka_parent ) {
-
-        if (child_ka_parent != v)
-            return false;
-
-        if (parent_ka_parent == child_ka_parent)
-            return false;
-
-        parent[v]=u;
-        flag--;
-        return true;
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (sizee[ulp_u] < sizee[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            sizee[ulp_v] += sizee[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            sizee[ulp_u] += sizee[ulp_v];
+        }
     }
-    bool isSingleComponentLeftOrNot(){
-        return flag==1;
+
+    int sizeOfComponent(int ult_p){
+        return sizee[ult_p];
     }
+
 };
 
 class Solution {
 public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-         int n=edges.size();
-        
+        int n=edges.size();
+
+        vector<int>ans={-1,-1};
         DisjointSet ds(n);
         
-        vector<int>ans(2,0);
-        for(auto it:edges){
-            int u=it[0];
-            int v=it[1];
+        for(int i=0;i<n;i++){
+            int u=edges[i][0];
+            int v=edges[i][1];
 
-            if(ds.findUPar(u)!=ds.findUPar(v)){
-                ds.unionByRank(u,v);
+            if(ds.findUPar(u) != ds.findUPar(v)){
+                ds.unionBySize(u,v);
             }
             else{
-                ans[0]=u;
-                ans[1]=v;
+                ans={u,v};
             }
         }
+
         return ans;
     }
 };
