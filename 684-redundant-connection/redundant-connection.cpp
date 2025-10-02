@@ -65,14 +65,10 @@ public:
             int u=edges[i][0];
             int v=edges[i][1];
 
-            if(ds.findUPar(u) != ds.findUPar(v)){
-                ds.unionBySize(u,v);
-            }
-            else{
-                ans={u,v};
-            }
+            if(ds.findUPar(u) != ds.findUPar(v)) ds.unionBySize(u,v);
+            else return {u,v};
         }
 
-        return ans;
+        return {};
     }
 };
