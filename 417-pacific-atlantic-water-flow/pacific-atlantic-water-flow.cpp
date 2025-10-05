@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-bool flag1,flag2;
+bool pacific,atlantic;
 int n,m;
 
 vector<vector<int>>dir={{0,1},{0,-1},{1,0},{-1,0}};
@@ -9,8 +9,8 @@ vector<vector<int>>dir={{0,1},{0,-1},{1,0},{-1,0}};
 void dfs(vector<vector<int>>& heights,int i,int j,vector<vector<int>>&vis){
     vis[i][j]=1;
 
-    if(i==0 || j==0)flag1=1;
-    if(i==n-1 || j==m-1)flag2=1;
+    if(i==0 || j==0)pacific=1;
+    if(i==n-1 || j==m-1)atlantic=1;
 
     for(auto &it:dir){
         int new_i=i+it[0];
@@ -33,9 +33,9 @@ void dfs(vector<vector<int>>& heights,int i,int j,vector<vector<int>>&vis){
             for(int j=0;j<m;j++){
 
                 dfs(heights,i,j,vis);
-                if(flag1 && flag2) res.push_back({i,j});
+                if(pacific && atlantic) res.push_back({i,j});
 
-                flag1=0,flag2=0;
+                pacific=0,atlantic=0;
                 vis.assign(n,vector<int>(m,0));
             }
         }
