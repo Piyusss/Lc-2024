@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<int> avoidFlood(vector<int>& r){
+    vector<int> avoidFlood(vector<int>& r) {
         int n=r.size();
         vector<int>ans(n,1);
 
@@ -9,7 +9,7 @@ public:
 
         for(int d=0;d<n;d++){
             int x=r[d];
-            
+
             if(x==0){
                 free.insert(d);
                 continue;
