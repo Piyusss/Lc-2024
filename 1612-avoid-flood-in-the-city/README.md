@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/avoid-flood-in-the-city">Avoid Flood in The City</a></h2> <img src='https://img.shields.io/badge/Difficulty-Medium-orange' alt='Difficulty: Medium' /><hr><p>Your country has an infinite number of lakes. Initially, all the lakes are empty, but when it rains over the <code>nth</code> lake, the <code>nth</code> lake becomes full of water. If it rains over a lake that is <strong>full of water</strong>, there will be a <strong>flood</strong>. Your goal is to avoid floods in any lake.</p>
+<h2><a href="https://leetcode.com/problems/avoid-flood-in-the-city">Avoid Flood in The City</a></h2> <img src='https://img.shields.io/badge/Difficulty-Medium-orange' alt='Difficulty: Medium' /><hr><p>Your country has an infinite number of lakes. Initially, all the lakes are empty, but when it rains over the <code>n<sup>th</sup></code> lake, the <code>n<sup>th</sup></code> lake becomes full of water. If it rains over a lake that is <strong>full of water</strong>, there will be a <strong>flood</strong>. Your goal is to avoid floods in any lake.</p>
 
 <p>Given an integer array <code>rains</code> where:</p>
 
