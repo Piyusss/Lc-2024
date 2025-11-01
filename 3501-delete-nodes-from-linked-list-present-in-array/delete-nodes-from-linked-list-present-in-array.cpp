@@ -21,7 +21,6 @@ public:
             temp=temp->next;
         }
 
-        for(auto &it:res)cout<<it<<" ";
         ListNode* dummy=new ListNode(-1);
         ListNode* dummyCopy=dummy;
 
