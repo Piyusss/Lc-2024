@@ -1,4 +1,3 @@
-#define ll long long
 class Solution {
 public:
     vector<vector<int>> rangeAddQueries(int n, vector<vector<int>>& q) {
@@ -6,7 +5,7 @@ public:
 
         for(auto &v:q){
             int x1=v[0],y1=v[1],x2=v[2],y2=v[3];
-            
+
             for(int i=x1;i<=x2;i++){
                 a[i][y1]++;
                 if(y2+1<n)a[i][y2+1]--;
