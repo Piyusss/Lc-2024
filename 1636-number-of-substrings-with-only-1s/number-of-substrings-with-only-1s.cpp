@@ -23,7 +23,6 @@ int M=1E9+7;
         }
 
         if(flag) res= (res%M+ ((cnt)*(cnt+1)/2)%M )%M;
-
         return res%M;
     }
 };
