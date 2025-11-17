@@ -3,19 +3,15 @@ public:
     bool kLengthApart(vector<int>& nums, int k) {
         int n=nums.size();
 
-        int start=0;
+        int start=0,end=0,flag=1,flag2=1;
         for(int i=0;i<n;i++){
-            if(nums[i]==1){
+            if(nums[i] && flag){
                 start=i;
-                break;
+                flag=0;
             }
-        }
-
-        int end=0;
-        for(int i=n-1;i>=start;i--){
-            if(nums[i]==1){
-                end=i;
-                break;
+            if(nums[n-i-1] && flag2){
+                end=n-i-1;
+                flag2=0;
             }
         }
 
