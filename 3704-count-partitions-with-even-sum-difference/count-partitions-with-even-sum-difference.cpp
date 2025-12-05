@@ -12,7 +12,6 @@ public:
             leftHalfSum += nums[i];
             rightHalfSum = (totalSum-leftHalfSum);
 
-            cout<<leftHalfSum-rightHalfSum<<endl;
             if(abs(leftHalfSum-rightHalfSum) % 2 == 0) cnt++;
         }
 
