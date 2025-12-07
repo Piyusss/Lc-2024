@@ -2,6 +2,26 @@ class Solution {
 public:
     int countOdds(int l, int h) {
         return (++h>>1)-(l>>1);
+
+        //or
+        // return (++h/2)-(l/2);
+        //or
+        // return (h+1)/2-(l)/2;
+        //or
+        // return (h+1)/2-(--l+1)/2;
+        //or
+        // return ((h+1)/2)-((--l+1)/2);
+        
+        //or
+        // l--;
+        // int leftEnd=(l+1)/2;
+        // int rightEnd=(h+1)/2;
+        // return rightEnd-leftEnd;
+
+        //or
+        // int cnt=0;
+        // for(int i=low;i<=high;i++) if(i&1) cnt++;
+        // return cnt;
     }
 };
 
