@@ -1,12 +1,7 @@
 class Solution {
 public:
     int countOdds(int l, int h) {
-        l--;
-
-        int leftEnd=(l+1)/2;
-        int rightEnd=(h+1)/2;
-
-        return rightEnd-leftEnd;
+        return ((h+1)/2)-((--l+1)/2);
     }
 };
 
