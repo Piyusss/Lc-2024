@@ -1,48 +1,34 @@
+using ll=long long;
+
 class Solution {
 public:
-    int mostBooked(int n, vector<vector<int>>& meetings){
-        int m=meetings.size();
-        sort(meetings.begin(),meetings.end());
+    int mostBooked(int n, vector<vector<int>>&a) {
+        sort(a.begin(),a.end());
+        vector<ll>t(n),c(n);
 
-        vector<long long>lastAvailableAt(n,0);
-        vector<int>roomUsedCount(n,0);
+        for(auto &v:a){
+            int s=v[0],e=v[1],d=e-s;
+            int r=-1;
 
-        for(auto &it:meetings){
-            int start=it[0];
-            int end=it[1];
-            int dur=end-start;
-            bool found=false;
-
-            long long earlyEndRoomTime=LLONG_MAX;
-            int earlyEndRoom=0;
-
-            for(int room=0;room<n;room++){
-                if(lastAvailableAt[room]<=start){
-                    lastAvailableAt[room]=end;
-                    roomUsedCount[room]++;
-                    found=true;
+            ll mn=LLONG_MAX;
+            for(int i=0;i<n;i++){
+                if(t[i]<=s){
+                    r=i;
                     break;
                 }
-                if(lastAvailableAt[room]<earlyEndRoomTime){
-                    earlyEndRoomTime=lastAvailableAt[room];
-                    earlyEndRoom=room;
+                if(t[i]<mn){
+                    mn=t[i];
+                    r=i;
                 }
             }
-
-                if(!found){
-                    lastAvailableAt[earlyEndRoom]+=dur;
-                    roomUsedCount[earlyEndRoom]++;
-                }
-            }
+            if(t[r]<=s)t[r]=e;
+            else t[r]+=d;
             
-            int resultRoom=-1;
-            int maxUse=0;
-            for(int room=0;room<n;room++){
-                if(roomUsedCount[room]>maxUse){
-                    maxUse=roomUsedCount[room];
-                    resultRoom=room;
-                }
-            }
-        return resultRoom;
+            c[r]++;
+        }
+
+        ll ans=0;
+        for(int i=1;i<n;i++) if(c[i]>c[ans]) ans=i;
+        return ans;
     }
 };
