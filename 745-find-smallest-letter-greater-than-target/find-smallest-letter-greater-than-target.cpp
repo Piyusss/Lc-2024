@@ -14,14 +14,17 @@ bool f(int mid,vector<char>&letters,int target){
 
         //method-02 ---> o(log(n))
         if(target>=letters[n-1]) return letters[0];
-        int l=0,r=n-1,mid=-1;
+        int l=0,r=n-1,mid=-1,ans=-1;
 
         while(l<=r){
             mid=l+((r-l)>>1);
-            if(f(mid,letters,target)) r=mid-1;
+            if(f(mid,letters,target)){
+                ans=mid;
+                r=mid-1;
+            }
             else l=mid+1;
         }
 
-        return letters[l];
+        return letters[ans];
     }
 };
