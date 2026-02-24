@@ -12,7 +12,7 @@
 class Solution {
 public:
 
-    int dfs(TreeNode* node,int curr) {
+    int dfs(TreeNode* node,int curr){
         if(!node) return 0;
 
         int val=(curr<<1) | node->val;
