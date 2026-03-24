@@ -1,8 +1,7 @@
+const int M=12345;
+
 class Solution {
 public:
-
-int M=12345;
-
     vector<vector<int>> constructProductMatrix(vector<vector<int>>& grid) {
         int n=grid.size();
         int m=grid[0].size();
@@ -33,6 +32,5 @@ int M=12345;
         }
 
         return res;
-
     }
 };
