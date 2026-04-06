@@ -15,8 +15,8 @@ public:
             else if(it==-1) p={p.second,-p.first};
             else{
                 for(int i=1;i<=it;i++){
-                    int newX= x + p.first;
-                    int newY= y + p.second;
+                    int newX=x+p.first;
+                    int newY=y+p.second;
 
                     if(st.find(to_string(newX) + "_" + to_string(newY)) != st.end())break;
 
