@@ -2,16 +2,14 @@
 class Solution {
 public:
     bool rotateString(string s, string goal){
-        int n=s.size();
-        int m=goal.size();
+        int n=s.size(),m=goal.size();
 
         if(m!=n) return 0;
 
         s+=s;
-        if(s.find(goal) != string::npos) return 1;
+        if(s.find(goal)!=string::npos) return 1;
 
         return 0;
-
     }
 };
 
@@ -34,26 +32,8 @@ public:
 //     }
 // };
 
+
 // Approach-03:
-// class Solution {
-// public:
-//     bool rotateString(string s, string goal){
-//         int n=s.size();
-//         int m=goal.size();
-
-//         if(m<n) return 0;
-
-//         s+=s;
-//         for(int i=0;i<n;i++){
-//             if(s.substr(i,m)==goal) return 1;
-//         }
-
-//         return 0;
-
-//     }
-// };
-
-// Approach-04:
 // class Solution {
 // public:
 //     bool rotateString(string s, string goal) {
@@ -69,7 +49,7 @@ public:
 //     }
 // };
 
-// Approach-05:
+// Approach-04:
 // class Solution {
 // public:
 //     bool rotateString(string s, string goal) {
