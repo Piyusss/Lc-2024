@@ -4,26 +4,16 @@ struct Node {
     int cntPrefix = 0;
     bool flag = false;
 
-    bool containsKey(int idx) {
-        return (links[idx] != NULL); 
+    bool containsKey(char ch) {
+        return (links[ch - '0'] != NULL); 
     }
 
-    Node* get(int idx) {
-        return links[idx]; 
+    Node* get(char ch) {
+        return links[ch - '0']; 
     }
 
-    void put(int idx, Node* node) {
-        links[idx] = node;
-    }
-
-    void setEnd()
-    {
-        flag = true;
-    }
-
-    bool isEnd()
-    {
-        return flag;
+    void put(char ch, Node* node) {
+        links[ch - '0'] = node;
     }
 };
 
@@ -39,41 +29,48 @@ public:
     void insert(string word) {
         Node* node = root; 
         for (int i = 0; i < word.size(); i++) { 
-            if (!node->containsKey(word[i]-'0')) {
-                node->put(word[i]-'0', new Node()); 
+            if (!node->containsKey(word[i])) {
+                node->put(word[i], new Node()); 
             }
-            node = node->get(word[i]-'0');
+            node = node->get(word[i]);
         }
-        node->setEnd();
     }
 
 };
+
 class Solution {
 public:
 
-int f(string num,Node* rooted){
+int f(string &s,Node* r){
+    int n=s.size();
     int cnt=0;
 
-    for(auto &it:num){
-        if(rooted->containsKey(it-'0')){
+    for(int i=0;i<n;i+=1){
+        char ch=s[i];
+        if(r->containsKey(ch)){
             cnt+=1;
-            rooted=rooted->get(it-'0');
+            r=r->get(ch);
         }
         else break;
     }
 
     return cnt;
-
 }
     int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
-        Trie trie;
-        for(auto &it:arr1) trie.insert(to_string(it));
+        int n=arr1.size();
+        int m=arr2.size();
 
-        int maxi=0;
-        Node* rooted=trie.root;
-        for(auto &it:arr2) maxi=max(maxi,f(to_string(it),rooted));
+        Trie t;
+        for(auto &c:arr1) t.insert(to_string(c));
 
-        return maxi;
+        Node* r=t.root;
 
+        int res=0;
+        for(auto &c:arr2){
+            string s=to_string(c);
+            res=max(res,f(s,r));
+        }
+
+        return res;
     }
 };
