@@ -6,7 +6,7 @@ public:
         vector<int>v(26,0);
 
         for(auto &c:cur) v[c-'a']++;
-        for(int i=0;i<26;i++) res+=string(v[i],i+'a');
+        for(int i=0;i<26;i++) if(v[i]!=0) res+=string(v[i],i+'a');
 
         return res;
     }
