@@ -1,68 +1,58 @@
+struct Node {
+    int ch[26];
+    int len,idx;
+
+    Node(){
+        fill(ch,ch+26,-1);
+        len=1e9;
+        idx=1e9;
+    }
+};
+
 class Solution {
 public:
-        struct trieNode{
-            int idx;
-            trieNode* child[26];
-          };
+    vector<int> stringIndices(vector<string>& a,vector<string>& q) {
+        vector<Node>t(1);
 
-          trieNode* getNode(int i){
-            trieNode* temp=new trieNode();
-            temp->idx=i;
+        for(int i=0;i<a.size();i++){
+            int n=a[i].size(),u=0;
 
-            for(int i=0;i<26;i++){
-                temp->child[i]=NULL;
+            if(n<t[u].len || (n==t[u].len && i<t[u].idx)){
+                t[u].len=n;
+                t[u].idx=i;
             }
-            return temp;
-        }
-
-        void insertTrie(trieNode* crawl,int i,vector<string>& wordsContainer){
-            string word=wordsContainer[i];
-            int n=word.size();
 
             for(int j=n-1;j>=0;j--){
-                int ch_idx=word[j]-'a';
+                int c=a[i][j]-'a';
 
-                if(crawl->child[ch_idx]==NULL){
-                    crawl->child[ch_idx]=getNode(i);
+                if(t[u].ch[c]==-1){
+                    t[u].ch[c]=t.size();
+                    t.push_back(Node());
                 }
-                crawl=crawl->child[ch_idx];
-                if(wordsContainer[crawl->idx].size()>n){
-                    crawl->idx=i;
+
+                u=t[u].ch[c];
+
+                if(n<t[u].len || (n==t[u].len && i<t[u].idx)){
+                    t[u].len=n;
+                    t[u].idx=i;
                 }
             }
         }
 
-        int searchTrie(trieNode* crawl,string &word){
-            int n=word.size();
-            int result_idx=crawl->idx;
+        vector<int>r;
 
-            for(int i=n-1;i>=0;i--){
-                int ch_idx=word[i]-'a';
-                crawl=crawl->child[ch_idx];
-                if(crawl==NULL)return result_idx;
-                result_idx=crawl->idx;
+        for(auto &s:q){
+            int u=0;
+
+            for(int j=s.size()-1;j>=0;j--){
+                int c=s[j]-'a';
+                if(t[u].ch[c]==-1) break;
+                u=t[u].ch[c];
             }
-            return result_idx;
-    }
 
-    vector<int> stringIndices(vector<string>& wordsContainer, vector<string>& wordsQuery){
-        int n=wordsContainer.size();
-        int m=wordsQuery.size();
-
-        trieNode* root=getNode(0);
-
-        vector<int>ans;
-
-        for(int i=0;i<n;i++){
-            if(wordsContainer[root->idx].size()>wordsContainer[i].size()){
-                root->idx=i;
-            }
-            insertTrie(root,i,wordsContainer);
+            r.push_back(t[u].idx);
         }
 
-        for(int i=0;i<m;i++){
-            ans.push_back(searchTrie(root,wordsQuery[i]));
-        }
-        return ans;
+        return r;
     }
 };
