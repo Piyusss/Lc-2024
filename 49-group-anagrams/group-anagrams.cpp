@@ -1,5 +1,16 @@
 class Solution {
 public:
+
+    string f(string &cur){
+        string res="";
+        vector<int>v(26,0);
+
+        for(auto &c:cur) v[c-'a']++;
+        for(int i=0;i<26;i++) res+=string(v[i],i+'a');
+
+        return res;
+    }
+
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         int n=strs.size();
 
@@ -8,7 +19,7 @@ public:
 
         for(int i=0;i<n;i++){
             string cur=strs[i];
-            sort(cur.begin(),cur.end());
+            cur=f(cur);
             mp[cur].push_back(strs[i]);
         }
 
