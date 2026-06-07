@@ -32,6 +32,7 @@ public:
             int par=it[0];
             if(childSet.find(par)==childSet.end()) return mp[par];
         }
+        
         return NULL;
     }
 };
