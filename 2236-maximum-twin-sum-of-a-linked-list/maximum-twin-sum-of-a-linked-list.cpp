@@ -11,17 +11,17 @@
 class Solution {
 public:
 
-ListNode* f(ListNode* &head){
-    ListNode* prev=NULL;
-    ListNode* curr=head;
-    while(curr!=NULL){
-        ListNode* forward=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=forward;
+    ListNode* f(ListNode* &head){
+        ListNode* prev=NULL;
+        ListNode* curr=head;
+        while(curr!=NULL){
+            ListNode* forward=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=forward;
+        }
+        return prev;
     }
-    return prev;
-}
 
     int pairSum(ListNode* head){
         int cnt=0;
@@ -54,6 +54,7 @@ ListNode* f(ListNode* &head){
             flag1=flag1->next;
             flag2=flag2->next;
         }
+        
         return maxi;
     }
 };
