@@ -53,17 +53,16 @@ public:
 
 };
 
+const int N_MAX=1E3;
+
 class Solution {
 public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        int n=edges.size();
+        DisjointSet ds(N_MAX);
 
-        vector<int>ans={-1,-1};
-        DisjointSet ds(n);
-        
-        for(int i=0;i<n;i++){
-            int u=edges[i][0];
-            int v=edges[i][1];
+        for(auto &c:edges){
+            int u=c[0];
+            int v=c[1];
 
             if(ds.findUPar(u) != ds.findUPar(v)) ds.unionBySize(u,v);
             else return {u,v};
