@@ -4,7 +4,7 @@ public:
     vector<pair<int,int>>dir={{0,1},{0,-1},{1,0},{-1,0}};
 
     void dfs(int i,int j,vector<vector<char>>&grid,int n,int m){
-        grid[i][j]=-1;
+        grid[i][j]='#';
 
         for(auto &c:dir){
             int ni=i+c.first;
