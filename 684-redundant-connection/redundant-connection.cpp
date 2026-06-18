@@ -53,12 +53,12 @@ public:
 
 };
 
-const int N_MAX=1E3;
-
 class Solution {
 public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        DisjointSet ds(N_MAX);
+        int n=edges.size();
+
+        DisjointSet ds(n+1);
 
         for(auto &c:edges){
             int u=c[0];
