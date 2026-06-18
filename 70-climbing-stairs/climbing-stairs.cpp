@@ -3,14 +3,14 @@ public:
     int climbStairs(int n) {
         if(n<=2) return n;
 
-        int prev1=1,prev2=2;
+        int prev=2,prevprev=1;
 
         for(int i=3;i<=n;i++){
-            int cur=prev1+prev2;
-            prev1=prev2;
-            prev2=cur;
+            int cur=prevprev+prev;
+            prevprev=prev;
+            prev=cur;
         }
 
-        return prev2;
+        return prev;
     }
 };
