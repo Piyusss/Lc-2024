@@ -4,20 +4,21 @@ public:
         int n=matrix.size();
         int m=matrix[0].size();
 
-        vector<vector<int>>new_matrix(n,vector<int>(m,0));
-
-        int cnt=0;
         for(int i=0;i<n;i++){
-            cnt=0;
             for(int j=0;j<m;j++){
-                int cur_el=matrix[i][j];
-
-                new_matrix[cnt][n-1-i]=cur_el;
-                cnt++;
+                if(i==j || i>j) continue;
+                swap(matrix[i][j],matrix[j][i]);
             }
         }
 
-        matrix=new_matrix;
+        if(!(m&1)) m-=1;
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<=m/2;j++){
+                swap(matrix[i][j],matrix[i][n-1-j]);
+            }
+        }
+
         return;
     }
 };
