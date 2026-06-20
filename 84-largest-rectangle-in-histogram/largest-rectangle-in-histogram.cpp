@@ -1,30 +1,44 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& nums) {
-        int n=nums.size();
 
-        vector<int>ls(n),rs(n);
+    vector<int>nse,pse;
 
+    void preCalcPse(vector<int>&heights,int n){
+        pse.resize(n);
         stack<int>st;
 
         for(int i=0;i<n;i++){
-            while(!st.empty() && nums[st.top()]>=nums[i])st.pop();
-            if(st.empty())ls[i]=0;
-            else ls[i]=st.top()+1;
+            while(!st.empty() && heights[st.top()]>=heights[i]) st.pop();
+            pse[i]=st.empty()?-1:st.top();
             st.push(i);
         }
+    }
 
-        while(!st.empty())st.pop();
+    void preCalcNse(vector<int>&heights,int n){
+
+        nse.resize(n);
+        stack<int>st;
 
         for(int i=n-1;i>=0;i--){
-            while(!st.empty() && nums[st.top()]>=nums[i])st.pop();
-            if(st.empty())rs[i]=n-1;
-            else rs[i]=st.top()-1;
+            while(!st.empty() && heights[st.top()]>=heights[i]) st.pop();
+            nse[i]=st.empty()?n:st.top();
             st.push(i);
         }
+    }
+
+    int largestRectangleArea(vector<int>& heights) {
+        int n=heights.size();
 
         int maxi=0;
-        for(int i=0;i<n;i++)maxi=max(maxi,(nums[i]*(1+rs[i]-ls[i])));
+
+        preCalcPse(heights,n);
+        preCalcNse(heights,n);
+
+        for(int i=0;i<n;i++){
+            int area=heights[i]*(nse[i]-pse[i]-1);
+            maxi=max(maxi,area);
+        }
+
         return maxi;
     }
 };
