@@ -12,8 +12,6 @@ public:
         int freqO=freq['o'-'a'];
         int freqN=freq['n'-'a'];
 
-        cout<<freqB<<" "<<freqA<<" "<<freqL<<" "<<freqO<<" "<<freqN;
-
         int mini=INT_MAX;
         mini=min(mini,min(freqB,min(freqA,min(freqL/2,min(freqO/2,freqN)))));
 
