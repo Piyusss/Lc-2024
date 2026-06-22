@@ -1,21 +1,23 @@
 class Solution {
 public:
     int maxNumberOfBalloons(string text) {
+        string target="balloon";
+
+        int m=target.size();
         int n=text.size();
-        vector<int>freq(26,0);
+
+        vector<int>freq(26,0),reqFreq(26,0);
 
         for(int i=0;i<n;i++) freq[text[i]-'a']++;
-
-        int freqB=freq['b'-'a'];
-        int freqA=freq['a'-'a'];
-        int freqL=freq['l'-'a'];
-        int freqO=freq['o'-'a'];
-        int freqN=freq['n'-'a'];
+        for(int i=0;i<m;i++) reqFreq[target[i]-'a']++;
 
         int mini=INT_MAX;
-        mini=min(mini,min(freqB,min(freqA,min(freqL/2,min(freqO/2,freqN)))));
 
-        if(freqB<1 || freqA<1 || freqL<2 || freqO<2 || freqN<1) return 0;
+        for(auto &c:target){
+            if(freq[c-'a']<reqFreq[c-'a']) return 0;
+            mini=min(mini,freq[c-'a']/reqFreq[c-'a']);
+        }
+
         return mini;
     }
 };
