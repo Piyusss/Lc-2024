@@ -13,7 +13,7 @@ class Solution {
 public:
 
     int f(TreeNode* root){
-        if(root==NULL) return 0;
+        if(!root) return 0;
 
         int lh=f(root->left);if(lh==-1) return -1;
         int rh=f(root->right);if(rh==-1) return -1;
@@ -24,6 +24,7 @@ public:
     }
 
     bool isBalanced(TreeNode* root) {
+        if(!root) return 1;
         return f(root)!=-1;
     }
 };
