@@ -11,7 +11,6 @@ public:
         sort(v.begin(),v.end());
 
         vector<array<int,L>>up(n);
-
         int r=n-1;
 
         for(int l=n-1;l>=0;l--){
