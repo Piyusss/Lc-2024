@@ -1,33 +1,31 @@
 class Solution {
 public:
-    vector<int> findOrder(int n, vector<vector<int>>& pre) {
-        vector<int>indegree(n);
+    vector<int> findOrder(int n, vector<vector<int>>& p) {
+        int m=p.size();
 
-        vector<int>adjList[n];
-        for(auto it:pre){
+        vector<int>adjList[n],inDeg(n);
+        for(int i=0;i<m;i++){
+            auto it=p[i];
             adjList[it[1]].push_back(it[0]);
-            indegree[it[0]]++;
+            inDeg[it[0]]++;
         }
 
         queue<int>q;
-        for(int i=0;i<n;i++){
-            if(indegree[i]==0)q.push(i);
-        }
+        for(int i=0;i<n;i++) if(inDeg[i]==0) q.push(i);
 
-        vector<int>ans;
+        vector<int>res;
         while(!q.empty()){
-            int node=q.front();
-            ans.push_back(node);
+            auto node=q.front();
+            res.push_back(node);
             q.pop();
 
-            for(auto it:adjList[node]){
-                indegree[it]--;
-                if(indegree[it]==0)q.push(it);
+            for(auto &c:adjList[node]){
+                inDeg[c]-=1;
+                if(inDeg[c]==0) q.push(c);
             }
         }
 
-        if(ans.size()==n)return ans;
-        ans.clear();
-        return ans;
+        if(res.size()==n) return res;
+        return {};
     }
 };
