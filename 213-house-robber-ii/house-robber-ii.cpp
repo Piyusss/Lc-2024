@@ -1,28 +1,30 @@
 class Solution {
 public:
 
-int dp[100+1];
+    int dp[100];
 
-    int f(vector<int>& nums) {
-        int n=nums.size();
-        dp[0]=nums[0];
-        for(int i=1;i<=n-1;i++)dp[i]=max(i>=2 ? nums[i]+dp[i-2] : nums[i] , dp[i-1]);
-        return dp[n-1];
+    int f1(vector<int>&nums,int idx){
+        if(idx>=nums.size()) return 0;
+        if(dp[idx]!=-1) return dp[idx];
+        return dp[idx]=max(nums[idx]+f1(nums,idx+2) , 0+f1(nums,idx+1));
     }
+
+    int f2(vector<int>&nums,int idx){
+        if(idx>=nums.size()-1) return 0;
+        if(dp[idx]!=-1) return dp[idx];
+        return dp[idx]=max(nums[idx]+f2(nums,idx+2) , 0+f2(nums,idx+1));
+    }
+
     int rob(vector<int>& nums) {
         int n=nums.size();
-        if(nums.size()==1)return nums[0];
-
-        vector<int>temp1,temp2;
-        for(int i=0;i<nums.size();i++){
-            if(i!=0)temp1.push_back(nums[i]);
-            if(i!=nums.size()-1)temp2.push_back(nums[i]);
-        }
-
+        if(n==1) return nums[0];
+        
         memset(dp,-1,sizeof(dp));
-        int a=f(temp1);
+        
+        int _1st=f1(nums,1);
         memset(dp,-1,sizeof(dp));
-        int b=f(temp2);
-        return max(a,b);
+        int _2nd=f2(nums,0);
+
+        return max(_1st,_2nd);
     }
 };
