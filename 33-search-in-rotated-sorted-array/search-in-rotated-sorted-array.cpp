@@ -1,10 +1,10 @@
 class Solution {
 public:
 
-    int f(vector<int>&nums){
-        int l=0,r=nums.size()-1;
+    int f(vector<int>&nums,int n){
+        int l=0,r=n-1,m=-1;
         while(l<r){
-            int m=l+((r-l)>>1);
+            m=l+((r-l)>>1);
             if(nums[m]>nums[r]) l=m+1;
             else r=m;
         }
@@ -21,12 +21,12 @@ public:
         return -1;
     }
 
-    int search(vector<int>& nums, int target) {
+    int search(vector<int>& nums, int t) {
         int n=nums.size();
-        int pivot=f(nums);
+        int pivot=f(nums,n);
 
-        if(target>=nums[pivot] && target<=nums[n-1]) return f2(pivot,n-1,nums,target);
-        else return f2(0,pivot-1,nums,target);
+        if(t>=nums[pivot] && t<=nums[n-1]) return f2(pivot,n-1,nums,t);
+        else return f2(0,pivot-1,nums,t);
 
         return -1;
     }
