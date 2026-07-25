@@ -1,19 +1,22 @@
 class Solution {
 public:
     int maxProduct(int n) {
-        string s=to_string(n);
+        int m=0,sm=0;
 
-        priority_queue<int,vector<int>,greater<int>>pq;
+        while(n){
+            int d=n%10;
 
-        for(auto &c:s){
-            pq.push(c-'0');
-            if(pq.size()>2) pq.pop();
+            if(d>m){
+                sm=m;
+                m=d;
+            }
+            else if(d>sm){
+                sm=d;
+            }
+
+            n/=10;
         }
 
-        int maxi=pq.top();
-        pq.pop();
-        int secondMaxi=pq.top();
-
-        return maxi*secondMaxi;
+        return m*sm;
     }
 };
