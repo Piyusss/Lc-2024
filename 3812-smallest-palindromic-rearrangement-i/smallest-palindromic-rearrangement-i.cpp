@@ -10,3 +10,5 @@ public:
         return s.substr(n);
     }
 };
+
+//so complex in look yet so beautiful :)
