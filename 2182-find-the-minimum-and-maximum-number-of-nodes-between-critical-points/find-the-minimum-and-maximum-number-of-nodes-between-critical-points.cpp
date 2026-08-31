@@ -40,7 +40,6 @@ int maxDistance=INT_MIN;
         }
 
         if(track<=1)return {-1,-1};
-
         return {minDistance,maxi-mini};
     }
 };
