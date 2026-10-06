@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int minAddToMakeValid(string s){
+    int minAddToMakeValid(string s) {
         stack<char>st;
         int cnt=0;
 
@@ -9,11 +9,9 @@ public:
                 if(!st.empty())st.pop();
                 else cnt++;
             }
-            else{
-                st.push('(');
-            }
+            else st.push('(');
         }
 
-        return (st.size()+cnt);
+        return st.size()+cnt;
     }
 };
