@@ -10,13 +10,13 @@ public:
             if(s[i]=='(') st.push('(');
             else{
                 if(i+1<n && s[i+1]==')'){
-                    if(!st.empty())st.pop();
+                    if(!st.empty()) st.pop();
                     else cnt++;
                     i++;
                 }
                 else{
                     cnt++;
-                    if(!st.empty())st.pop();
+                    if(!st.empty()) st.pop();
                     else cnt++;
                 }
             }
