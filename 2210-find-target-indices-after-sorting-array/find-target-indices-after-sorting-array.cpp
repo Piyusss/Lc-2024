@@ -6,7 +6,7 @@ public:
         sort(a.begin(),a.end());
         vector<int>ans;
 
-        for(int i=0;i<n;i++)  if(a[i]==t) ans.push_back(i);
+        for(int i=0;i<n;i++) if(a[i]==t) ans.push_back(i);
         return ans;
     }
 };
