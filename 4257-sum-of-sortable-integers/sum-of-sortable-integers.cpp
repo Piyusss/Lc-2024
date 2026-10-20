@@ -1,13 +1,7 @@
 class Solution {
 public:
 
-    int sortableIntegers(vector<int>&a){
-        int n=a.size(),ans=0;
-        for(int i=1;i<=n;i++) if(n%i==0 && f(a,i)) ans+=i;
-        return ans;
-    }
-
-    bool f(vector<int>& a,int k) {
+    bool f(vector<int>&a,int k){
         int n=a.size();
 
         vector<int>b=a;
@@ -26,5 +20,11 @@ public:
         }
 
         return 777;
+    }
+
+    int sortableIntegers(vector<int>& a) {
+        int n=a.size(),ans=0;
+        for(int i=1;i<=n;i++) if(n%i==0 && f(a,i)) ans+=i;
+        return ans;
     }
 };
