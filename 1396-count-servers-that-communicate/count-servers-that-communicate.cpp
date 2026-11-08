@@ -1,6 +1,8 @@
-class DisjointSet{
+class DisjointSet {
+public:
+
     vector<int>rank,parent,size;
-    public:
+
     DisjointSet(int n){
         rank.resize(n+1,0);
         parent.resize(n+1);
@@ -10,10 +12,12 @@ class DisjointSet{
             size[i]=1;
         }
     }
+
     int findUPar(int node){
         if(node==parent[node])return node;
         return parent[node]=findUPar(parent[node]);
     }
+
     void unionBySize(int u,int v){
         int ulp_u=findUPar(u);
         int ulp_v=findUPar(v);
@@ -44,8 +48,8 @@ public:
        DisjointSet ds((n*m));
 
        map<pair<int,int>,int>mp;
-
        int flag=0;
+
        for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 mp[{i,j}]=flag++;
@@ -76,6 +80,7 @@ public:
                 if(add>=2)res+=add;
             }
         }
+        
         return res;
     }
 };
